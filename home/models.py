@@ -22,21 +22,18 @@ class Tier (models.Model):
         return self.name
 
 
-class User (models.Model):
+class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=50)
-    email = models.EmailField(max_length=254, null=False, blank=False)
-    full_name = models.CharField(max_length=50, null=False, blank=False)
     is_creator = models.Boolean(default=False, null=True, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.user
 
 
 class GameProject (models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
-    owner = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(blank=False, null=False, default=timezone.now)
 
     def __str__(self):
@@ -45,7 +42,7 @@ class GameProject (models.Model):
 
 class Comment (models.Model):
     content = models.TextField()
-    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
     created_at = models.DateTimeField(blank=False, null=False, default=timezone.now)
     blog_article = models.ForeignKey(BlogArticle, null=False, blank=False, on_delete=models.CASCADE)
 
@@ -65,7 +62,7 @@ class BlogArticle (models.Model):
 
 
 class Order (models.Model):
-    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
     subscription_plan = models.ForeignKey(SubscriptionPlan, null=False, blank=False, on_delete=models.CASCADE)
     order_number = models.CharField(max_length=32, null=False, editable=False)
 
