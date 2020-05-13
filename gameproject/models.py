@@ -6,7 +6,7 @@ from profiles.models import Profile
 class GameProject(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
-    owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(blank=False, null=False, default=timezone.now)
 
     def __str__(self):
