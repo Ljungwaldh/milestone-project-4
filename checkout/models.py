@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class Order(models.Model):
-    user = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL, related_name='orders')
     subscription_plan = models.ForeignKey(SubscriptionPlan, null=False, blank=False, on_delete=models.CASCADE)
     order_number = models.CharField(max_length=32, null=False, editable=False)
     stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
