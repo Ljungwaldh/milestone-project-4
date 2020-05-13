@@ -4,7 +4,7 @@ from profiles.models import Profile
 from django.utils import timezone
 
 
-class Order (models.Model):
+class Order(models.Model):
     user = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
     subscription_plan = models.ForeignKey(SubscriptionPlan, null=False, blank=False, on_delete=models.CASCADE)
     order_number = models.CharField(max_length=32, null=False, editable=False)

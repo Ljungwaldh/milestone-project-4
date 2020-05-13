@@ -3,7 +3,7 @@ from django.utils import timezone
 from profiles.models import Profile
 
 
-class GameProject (models.Model):
+class GameProject(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     owner = models.ForeignKey(Profile, null=False, blank=False, on_delete=models.CASCADE)
