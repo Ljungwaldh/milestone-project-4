@@ -12,9 +12,8 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'email']
 
 
-
 class CustomSignupForm(SignupForm):
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['is_creator'] = forms.BooleanField()
