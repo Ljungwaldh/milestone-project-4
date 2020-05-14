@@ -11,8 +11,8 @@ from gameproject.models import GameProject
 def profile(request):
     """ Display the user's profile. """
     profile = get_object_or_404(Profile, user=request.user)
-    subscriptions = get_object_or_404(Order, user=request.user)
-    game_project = get_object_or_404(GameProject, user=request.user)
+    subscriptions = profile.orders.all()
+    game_project = profile.orders.subscription_plan.gameproject.all()
 
     template = 'profiles/profile.html'
     context = {

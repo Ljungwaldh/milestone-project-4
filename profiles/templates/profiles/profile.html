@@ -21,4 +21,28 @@
         </div>
         {{ profile.user.email }}
         {{ profile.is_creator }}
+
+
+        <div class="container">
+            <div class="row">
+            <h3>Subscribed to</h3>
+                <div class="col-md-4">
+                {% if subscriptions == Null %}
+                    <p>You are currently not subscribed to any game projects</p>
+                {% else %}
+                    <ul>
+                    {% for subscription in user.subscriptions %}
+                        <li>
+                        {{ subscription.subscription_plan.game_project.name }}<br>
+                        {{ subscription.subscription_plan.tier }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                </div>
+            <h3>My Game Projects</h3>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
 {% endblock %}
