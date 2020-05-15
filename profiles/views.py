@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from checkout.models import Order
 from gameproject.models import GameProject
+from subscription.models import Donation
 
 
 @login_required
@@ -16,25 +17,27 @@ def profile(request):
     print(type(profile))
     print("****")
 
-    orders = Order.objects.filter(user=profile) # Display what user is subscribed to
+    orders = Order.objects.filter(user=profile)  # Display what user is subscribed to
 
     print("****")
     print(orders)
     print("****")
 
     # game_project = orders.subscription_plan.gameproject.all()
-    game_project = GameProject.objects.filter(owner=profile) # Displaying, if a creator, what projects they've created + any relevant data
+    game_project = GameProject.objects.filter(owner=profile)  # Displaying, if a creator, what projects they've created + any relevant data
 
     print("****")
     print(game_project)
     print("****")
 
+    donations = Donation.objects.all()
 
     template = 'profiles/profile.html'
     context = {
         'profile': profile,
         'orders': orders,
         'game_project': game_project,
+        'donations': donations
     }
 
     return render(request, template, context)

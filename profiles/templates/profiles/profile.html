@@ -25,7 +25,7 @@
 
         <div class="container">
             <div class="row">
-            <h3>Subscribed to</h3>
+            <h3>My Donations</h3>
                 <div class="col-md-4">
                 <!-- {% if subscriptions == Null %}
                     <p>You are currently not subscribed to any game projects</p>
@@ -41,8 +41,8 @@
                 {% endif %} -->
                 {% for order in orders %}
                 <p>{{ order.stripe_pid }}</p>
-                <p>{{ order.subscription_plan }}</p>
-                <p>{{ order.subscription_plan.price }}</p>
+                <p>{{ order.donation_item }}</p>
+                <p>{{ order.donation_item.amount }}</p>
                 {% endfor %}
                 </div>
             <h3>My Game Projects</h3>
@@ -52,8 +52,11 @@
         </div>
 
         <div>
-        {% for item in game_project %}
-           <p>{{ item.subscriptionplan.order.user.username }}</p>
+        {% for donation in donations %}
+        <p>{{ donation.title }}</p>
+        <p>{{ donation.amount }}</p>
+        <a class="btn btn-primary" href="{% url 'donate' donation.id %}">Donate to {{ game_project.title }}</a>
         {% endfor %}
         </div>
+        <a class="btn btn-primary" href="{ url  }"></a>
 {% endblock %}
