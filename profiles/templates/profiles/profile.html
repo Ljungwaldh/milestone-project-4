@@ -51,12 +51,5 @@
             </div>
         </div>
 
-        <div>
-        {% for donation in donations %}
-        <p>{{ donation.title }}</p>
-        <p>{{ donation.amount }}</p>
-        <a class="btn btn-primary" href="{% url 'donate' donation.id %}">Donate to {{ game_project.title }}</a>
-        {% endfor %}
-        </div>
-        <a class="btn btn-primary" href="{ url  }"></a>
+
 {% endblock %}

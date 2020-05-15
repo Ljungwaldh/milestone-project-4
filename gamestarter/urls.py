@@ -23,4 +23,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('profile/', include('profiles.urls')),
+    path('gameproject/', include('gameproject.urls')),
+    path('checkout/', include('checkout.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,9 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from subscription.models import Tier
 
 
+def donate(request):
 
-def subscribe(request, tier_id):
-    tier = get_object_or_404(Tier, pk=tier_id)
+    print(request.GET.get('game_project'))
+    donation_type = request.GET.get('donation_type')
+    game_project = request.GET.get('game_project')
 
-    subscription = get_object_or_404(tier, pk=subscription_id)
+    template = 'checkout/checkout.html'
+    context = {
+    }
+
+    return render(request, template, context)
