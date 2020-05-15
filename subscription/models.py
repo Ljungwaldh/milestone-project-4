@@ -17,4 +17,4 @@ class SubscriptionPlan(models.Model):
     tier = models.ForeignKey(Tier, null=False, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.title

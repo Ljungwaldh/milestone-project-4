@@ -27,22 +27,33 @@
             <div class="row">
             <h3>Subscribed to</h3>
                 <div class="col-md-4">
-                {% if subscriptions == Null %}
+                <!-- {% if subscriptions == Null %}
                     <p>You are currently not subscribed to any game projects</p>
                 {% else %}
                     <ul>
-                    {% for subscription in user.subscriptions %}
+                    {% for subscription in subscriptions %}
                         <li>
                         {{ subscription.subscription_plan.game_project.name }}<br>
                         {{ subscription.subscription_plan.tier }}
                         </li>
                     {% endfor %}
                     </ul>
-                {% endif %}
+                {% endif %} -->
+                {% for order in orders %}
+                <p>{{ order.stripe_pid }}</p>
+                <p>{{ order.subscription_plan }}</p>
+                <p>{{ order.subscription_plan.price }}</p>
+                {% endfor %}
                 </div>
             <h3>My Game Projects</h3>
                 <div class="col-md-4">
                 </div>
             </div>
+        </div>
+
+        <div>
+        {% for item in game_project %}
+           <p>{{ item.subscriptionplan.order.user.username }}</p>
+        {% endfor %}
         </div>
 {% endblock %}
