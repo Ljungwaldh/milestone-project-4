@@ -1,6 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import GameProject
 from subscription.models import Donation
+from django.contrib.auth.decorators import login_required
+from profiles.models import Profile
+from django.contrib import messages
+from .forms import ProjectForm
 
 
 def all_projects(request):
@@ -24,6 +28,34 @@ def project_detail(request, project_id):
     context = {
         'game_project': game_project,
         'donation_options': donation_options
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def add_project(request):
+
+    profile = get_object_or_404(Profile, user=request.user)
+
+    if not profile.is_creator:
+        messages.error(request, 'Sorry, only creators can do that.')
+        return redirect(reverse('home'))
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            project = form.save()
+            messages.success(request, 'Successfully created project!')
+            return redirect(reverse('product_detail', args=[project.id]))
+        else:
+            messages.error(request, 'Failed to create project. Please ensure the form is valid')
+
+    form = ProjectForm()
+
+    template = 'gameproject/add_project.html'
+    context = {
+        'form': form,
     }
 
     return render(request, template, context)
