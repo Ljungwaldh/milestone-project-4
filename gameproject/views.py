@@ -3,8 +3,6 @@ from .models import GameProject
 from subscription.models import Donation
 
 
-
-
 def all_projects(request):
 
     game_projects = GameProject.objects.all()
@@ -15,6 +13,7 @@ def all_projects(request):
     }
 
     return render(request, template, context)
+
 
 def project_detail(request, project_id):
 
