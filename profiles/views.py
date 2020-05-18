@@ -14,13 +14,13 @@ def profile(request):
 
     orders = Order.objects.filter(user=profile)  # Display what user is subscribed to
 
-    game_project = GameProject.objects.filter(owner=profile)  # Displaying, if a creator, what projects they've created + any relevant data
+    game_projects = GameProject.objects.filter(owner=profile)  # Displaying, if a creator, what projects they've created + any relevant data
 
     template = 'profiles/profile.html'
     context = {
         'profile': profile,
         'orders': orders,
-        'game_project': game_project,
+        'game_projects': game_projects,
     }
 
     return render(request, template, context)

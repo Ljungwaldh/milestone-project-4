@@ -27,29 +27,19 @@
             <div class="row">
             <h3>My Donations</h3>
                 <div class="col-md-4">
-                <!-- {% if subscriptions == Null %}
-                    <p>You are currently not subscribed to any game projects</p>
-                {% else %}
-                    <ul>
-                    {% for subscription in subscriptions %}
-                        <li>
-                        {{ subscription.subscription_plan.game_project.name }}<br>
-                        {{ subscription.subscription_plan.tier }}
-                        </li>
-                    {% endfor %}
-                    </ul>
-                {% endif %} -->
                 {% for order in orders %}
                 <p>{{ order.stripe_pid }}</p>
                 <p>{{ order.donation_item }}</p>
                 <p>{{ order.donation_item.amount }}</p>
                 {% endfor %}
                 </div>
+            {% if profile.is_creator %}
             <h3>My Game Projects</h3>
                 <div class="col-md-4">
+                {% for project in game_projects %}
+                    <p>{{ project.title }}</p>
+                    <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
                 </div>
             </div>
         </div>
-
-
 {% endblock %}
