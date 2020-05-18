@@ -22,11 +22,10 @@
         {{ profile.user.email }}
         {{ profile.is_creator }}
 
-
         <div class="container">
             <div class="row">
-            <h3>My Donations</h3>
                 <div class="col-md-4">
+                <h3>My Donations</h3>
                 {% for order in orders %}
                 <p>{{ order.stripe_pid }}</p>
                 <p>{{ order.donation_item }}</p>
@@ -34,12 +33,14 @@
                 {% endfor %}
                 </div>
             {% if profile.is_creator %}
-            <h3>My Game Projects</h3>
                 <div class="col-md-4">
+                <h3>My Game Projects</h3>
                 {% for project in game_projects %}
                     <p>{{ project.title }}</p>
                     <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
+                {% endfor %}
                 </div>
+            {% endif %}
             </div>
         </div>
 {% endblock %}
