@@ -10,10 +10,12 @@ from .forms import ProjectForm
 def all_projects(request):
 
     game_projects = GameProject.objects.all()
+    profile = get_object_or_404(Profile, user=request.user)
 
     template = 'gameproject/all_projects.html'
     context = {
-        'game_projects': game_projects
+        'game_projects': game_projects,
+        'profile': profile
     }
 
     return render(request, template, context)
@@ -53,12 +55,47 @@ def add_project(request):
         else:
             messages.error(request, 'Failed to create project. Please ensure the form is valid')
 
-    form = ProjectForm()
+    project_form = ProjectForm()
 
     template = 'gameproject/add_project.html'
     context = {
-        'form': form,
-        'profile': profile,
+        'project_form': project_form,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def edit_project(request, project_id):
+
+    profile = get_object_or_404(Profile, user=request.user)
+    project = get_object_or_404(GameProject, pk=project_id)
+
+    if not profile.is_creator:
+        messages.error(request, 'Sorry, only creators can do that.')
+        return redirect(reverse('home'))
+    elif not project.owner:
+        messages.error(request, 'Sorry, only the project owner can do that.')
+        return redirect(reverse('home'))
+
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST, instance=project)
+        if project_form.is_valid():
+            project_form.save(commit=False)
+            project.owner = profile
+            project.save()
+            messages.success(request, 'Successfully updated project!')
+            return redirect(reverse('project_detail', args=[project.id]))
+        else:
+            messages.error(request, 'Failed to update project. Please ensure the form is valid.')
+    else:
+        project_form = ProjectForm(instance=project)
+        messages.info(request, f'You are editing {project.title}')
+
+    template = 'gameproject/edit_project.html'
+    context = {
+        'project_form': project_form,
+        'project': project,
     }
 
     return render(request, template, context)
