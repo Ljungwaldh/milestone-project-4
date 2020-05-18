@@ -1,2 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block content %}
+<div>
+<h2>Create Game Project</h2>
+<form action="{% url 'add_project' %}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+        {% if field.name != 'owner' %}
+            {{ field }}
+        {% endif %}
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Create Project</button>
+</form>
+</div>
+{% endblock %}

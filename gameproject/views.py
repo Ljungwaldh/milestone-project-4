@@ -43,11 +43,13 @@ def add_project(request):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
-        if form.is_valid():
-            project = form.save()
+        project_form = ProjectForm(request.POST)
+        if project_form.is_valid():
+            project = project_form.save(commit=False)
+            project.owner = profile
+            project.save()
             messages.success(request, 'Successfully created project!')
-            return redirect(reverse('product_detail', args=[project.id]))
+            return redirect(reverse('project_detail', args=[project.id]))
         else:
             messages.error(request, 'Failed to create project. Please ensure the form is valid')
 
@@ -56,6 +58,7 @@ def add_project(request):
     template = 'gameproject/add_project.html'
     context = {
         'form': form,
+        'profile': profile,
     }
 
     return render(request, template, context)

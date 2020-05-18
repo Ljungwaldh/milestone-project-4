@@ -6,4 +6,4 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = GameProject
-        fields = ('title', 'description',)
+        fields = ('title', 'description', 'owner')
