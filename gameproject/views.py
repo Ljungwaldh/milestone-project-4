@@ -25,11 +25,13 @@ def project_detail(request, project_id):
 
     game_project = get_object_or_404(GameProject, pk=project_id)
     donation_options = Donation.objects.all()
+    profile = get_object_or_404(Profile, user=request.user)
 
     template = 'gameproject/project_detail.html'
     context = {
         'game_project': game_project,
-        'donation_options': donation_options
+        'donation_options': donation_options,
+        'profile': profile,
     }
 
     return render(request, template, context)
@@ -74,7 +76,7 @@ def edit_project(request, project_id):
     if not profile.is_creator:
         messages.error(request, 'Sorry, only creators can do that.')
         return redirect(reverse('home'))
-    elif not project.owner:
+    if project.owner != profile:
         messages.error(request, 'Sorry, only the project owner can do that.')
         return redirect(reverse('home'))
 

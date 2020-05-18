@@ -20,8 +20,10 @@
 {% endfor %}
 </div>
 <div>
+{% if game_project.owner == profile %}
 <a href="{% url 'edit_project' game_project.id %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update</a>
 <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
+{% endif %}
 </div>
 
 
