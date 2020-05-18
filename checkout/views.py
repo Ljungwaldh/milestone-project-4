@@ -4,8 +4,10 @@ from gameproject.models import GameProject
 from subscription.models import Donation
 from profiles.models import Profile
 from checkout.forms import OrderForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def donate(request):
 
     donation_type = request.GET.get('donation_type')

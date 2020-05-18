@@ -7,6 +7,7 @@ from django.contrib import messages
 from .forms import ProjectForm
 
 
+@login_required
 def all_projects(request):
 
     game_projects = GameProject.objects.all()
@@ -21,6 +22,7 @@ def all_projects(request):
     return render(request, template, context)
 
 
+@login_required
 def project_detail(request, project_id):
 
     game_project = get_object_or_404(GameProject, pk=project_id)
