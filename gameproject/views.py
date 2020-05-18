@@ -101,3 +101,22 @@ def edit_project(request, project_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_project(request, project_id):
+
+    profile = get_object_or_404(Profile, user=request.user)
+    project = get_object_or_404(GameProject, pk=project_id)
+
+    if not profile.is_creator:
+        messages.error(request, 'Sorry, only creators can do that.')
+        return redirect(reverse('home'))
+    if project.owner != profile:
+        messages.error(request, 'Sorry, only the project owner can do that.')
+        return redirect(reverse('home'))
+
+    project = get_object_or_404(GameProject, pk=project_id)
+    project.delete()
+    messages.success(request, 'Project deleted!')
+    return redirect(reverse('all_projects'))
