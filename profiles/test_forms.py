@@ -37,10 +37,10 @@ class TestCustomSignupFrom(TestCase):
 
     def test_user_is_created_as_a_creator(self):
         form = CustomSignupForm({'email': 'brian@brian.com', 'email2':
-                                 'brian@brian.com', 'username': 'thebrian', 'password1': 
+                                 'brian@brian.com', 'username': 'thebrian', 'password1':
                                  'hellothistest', 'password2': 'hellothistest', 'is_creator': True})
         post_data = {'email': 'brian@brian.com', 'email2':
-                     'brian@brian.com', 'username': 'thebrian', 'password1': 
+                     'brian@brian.com', 'username': 'thebrian', 'password1':
                      'hellothistest', 'password2': 'hellothistest', 'is_creator': True}
         response = self.client.post('/accounts/signup', post_data)
         self.assertTrue(form.is_valid())
