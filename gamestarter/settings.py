@@ -26,7 +26,7 @@ SECRET_KEY = 'n^ms79ws*n5#6k&da!6ozf)x^t_zomhesk+i03%^a)q1(etfk+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ljungwaldh-gamestarter.herokuapp.com']
 
 
 # Application definition
