@@ -19,6 +19,8 @@ def donate(request):
     context = {
         'donation': donation,
         'project': project,
+        'stripe_public_key': 'pk_test_vk5SWSVrNNA6Qa4uNiW6X8Mf00JGrxchjb',
+        'client_secret': 'test client secret'
     }
 
     return render(request, template, context)

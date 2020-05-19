@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 
-class TestCustomSignupFrom(TestCase):
+class TestViews(TestCase):
 
     def test_get_profile_page(self):
 
