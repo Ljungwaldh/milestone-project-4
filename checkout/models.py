@@ -1,10 +1,8 @@
 import uuid
 from django.db import models
-
 from profiles.models import Profile
-from subscription.models import Donation
 from django.utils import timezone
-from gameproject.models import GameProject
+from gameproject.models import GameProject, Donation
 
 
 class Order(models.Model):

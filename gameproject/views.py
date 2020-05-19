@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import GameProject
-from subscription.models import Donation
+from .models import GameProject, Donation
 from django.contrib.auth.decorators import login_required
 from profiles.models import Profile
 from django.contrib import messages

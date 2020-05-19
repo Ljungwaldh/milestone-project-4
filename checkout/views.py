@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib import messages
-from gameproject.models import GameProject
-from subscription.models import Donation
+from gameproject.models import GameProject, Donation
 from profiles.models import Profile
 from checkout.forms import OrderForm
 from django.contrib.auth.decorators import login_required
