@@ -9,15 +9,17 @@
 </div>
 
 <div>
-{% for option in donation_options %}
-<p>{{ option.title }}</p>
-<p>{{ option.amount }}</p>
-<form action="{% url 'donate' %}" method="GET">
-    <input type="hidden" value="{{ option.id }}" name="donation_type">
-    <input type="hidden" value="{{ game_project.id }}" name="game_project">
-  <button type="submit" class="btn btn-primary">Donate to {{ game_project.title }}</button>
-</form>
-{% endfor %}
+{% if game_project.owner != profile %}
+    {% for option in donation_options %}
+    <p>{{ option.title }}</p>
+    <p>{{ option.amount }}</p>
+    <form action="{% url 'donate' %}" method="GET">
+        <input type="hidden" value="{{ option.id }}" name="donation_type">
+        <input type="hidden" value="{{ game_project.id }}" name="game_project">
+    <button type="submit" class="btn btn-primary">Donate to {{ game_project.title }}</button>
+    </form>
+    {% endfor %}
+{% endif %}
 </div>
 <div>
 {% if game_project.owner == profile %}
