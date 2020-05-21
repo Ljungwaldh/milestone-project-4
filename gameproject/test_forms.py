@@ -23,8 +23,8 @@ class TestProjectForm(TestCase):
         user = User.objects.create(username='testuser')
         user.set_password('try12345')
         user.save()
-        profile = Profile.objects.create(user=user, is_creator=True)
-        logged_in = self.client.login(username='testuser', password='try12345')
+        Profile.objects.create(user=user, is_creator=True)
+        self.client.login(username='testuser', password='try12345')
 
         form = ProjectForm({'title': 'test', 'description': 'testing'})
         post_data = {'title': 'test', 'description': 'testing'}
