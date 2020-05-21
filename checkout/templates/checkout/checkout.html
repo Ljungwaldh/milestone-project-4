@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<form action="{% url 'donate' %}" method="POST">
+<form action="{% url 'donate' %}" method="POST" id="payment-form">
 {% csrf_token %}
     <input type="hidden" value="{{ donation }}" name="donation_item">
     <input type="hidden" value="{{ project }}" name="game_project">
