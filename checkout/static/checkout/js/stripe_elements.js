@@ -57,9 +57,12 @@ form.addEventListener('submit', function(ev) {
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
+        'message': 'I wannaaaaa ppaaayyyyyy'
     };
 
-    $.post(postData).done(function () {
+    var url = '/checkout/client-sent-payment-to-stripe';
+
+    $.post(url, postData).done(function () {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card
@@ -78,7 +81,8 @@ form.addEventListener('submit', function(ev) {
                 $('#submit-button').attr('disabled', false);
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
-                    form.submit();
+                    // form.submit();
+                    window.location.replace("/checkout/donate_success");
                 }
             }
         });

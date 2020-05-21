@@ -178,16 +178,19 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-
-# LOCAL
+# Local
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Stripe
+STRIPE_CURRENCY = 'eur'
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+# STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+
 # REMOTE
 # CREDENTIAL
-# Who I am
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-# Password
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 # REMOTE STORAGE ADDRESS (Building the URL)
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
