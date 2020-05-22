@@ -142,6 +142,10 @@
 
 /*  Testimonial section of landing page  */
 
+.testimonial-container {
+    margin-bottom: 50px;
+}
+
 .sq-crousal4 .carousel-indicators li::before {
     width: 15px;
     height: 15px;
