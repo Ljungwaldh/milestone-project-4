@@ -94,7 +94,7 @@ def stripe_webhook_receiver(request):
         print('PaymentIntent was successful!')
         print(payment_intent)
         order = get_object_or_404(Order, stripe_pid=payment_intent.id)
-        print('*** order : ', dir(order))
+        # print('*** order : ', dir(order))
         order.status = 'PA'
         order.save()
 

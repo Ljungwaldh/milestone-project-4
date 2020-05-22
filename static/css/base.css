@@ -1,6 +1,3 @@
-body {
-  padding-top: 56px;
-}
 
 /*  How It Works section of landing page  */
 
@@ -108,7 +105,9 @@ body {
 	box-shadow: 1px 3px 10px 0 rgba(0, 0, 0, 0.10)
 }
 
-.single-service i.fa {
+.single-service i.fa,
+.single-service i.far,
+.single-service i.fas {
 	font-size: 20px;
 	width: 60px;
 	height: 60px;
@@ -120,7 +119,9 @@ body {
 	transition: .3s
 }
 
-.single-service:hover i.fa {
+.single-service:hover i.fa, 
+.single-service:hover i.far,
+.single-service:hover i.fas {
 	background-color: #FF7200;
 	color: #fff;
 	border-color: #FF7200;
