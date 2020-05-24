@@ -82,7 +82,7 @@ def edit_project(request, project_id):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        project_form = ProjectForm(request.POST, instance=project)
+        project_form = ProjectForm(request.POST, request.FILES, instance=project)
         if project_form.is_valid():
             project_form.save(commit=False)
             project.owner = profile
