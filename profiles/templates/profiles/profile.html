@@ -26,19 +26,27 @@
             <div class="row">
                 <div class="col-md-4">
                 <h3>My Donations</h3>
-                {% for order in orders %}
-                <p>{{ order.stripe_pid }}</p>
-                <p>{{ order.donation_item }}</p>
-                <p>{{ order.donation_item.amount }}</p>
-                {% endfor %}
+                {% if not orders %}
+                    <p>No donations have been made yet</p>
+                {% else %}
+                    {% for order in orders %}
+                    <p>{{ order.stripe_pid }}</p>
+                    <p>{{ order.donation_item }}</p>
+                    <p>{{ order.donation_item.amount }}</p>
+                    {% endfor %}
+                {% endif %}
                 </div>
             {% if profile.is_creator %}
                 <div class="col-md-4">
                 <h3>My Game Projects</h3>
-                {% for project in game_projects %}
-                    <p>{{ project.title }}</p>
-                    <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
-                {% endfor %}
+                {% if not game_projects %}
+                    <p>No projects created yet</p>
+                {% else %}
+                    {% for project in game_projects %}
+                        <p>{{ project.title }}</p>
+                        <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
+                    {% endfor %}
+                {% endif %}
                 </div>
             {% endif %}
             </div>
