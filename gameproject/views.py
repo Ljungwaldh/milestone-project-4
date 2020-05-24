@@ -48,7 +48,7 @@ def add_project(request):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        project_form = ProjectForm(request.POST)
+        project_form = ProjectForm(request.POST, request.FILES)
         if project_form.is_valid():
             project = project_form.save(commit=False)
             project.owner = profile
