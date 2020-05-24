@@ -6,4 +6,6 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = GameProject
-        fields = ('title', 'description', 'owner')
+        fields = ('title', 'description', 'owner', 'image')
+
+    image = forms.ImageField(label='Image', required=False)

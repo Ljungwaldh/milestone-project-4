@@ -8,6 +8,7 @@ class GameProject(models.Model):
     description = models.TextField()
     owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(blank=False, null=False, default=timezone.now)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
