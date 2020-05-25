@@ -11,9 +11,9 @@ def profile(request):
     """ Display the user's profile. """
     profile = get_object_or_404(Profile, user=request.user)
 
-    orders = Order.objects.filter(user=profile)
+    orders = Order.objects.filter(user=profile).order_by('-created_at')
 
-    game_projects = GameProject.objects.filter(owner=profile)
+    game_projects = GameProject.objects.filter(owner=profile).order_by('-created_at')
 
     template = 'profiles/profile.html'
     context = {

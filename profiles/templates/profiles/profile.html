@@ -66,7 +66,7 @@
                 <div class="item2 col-xs-4 col-lg-4">
                 <div class="thumbnail card">
                     <div class="img-event">
-                        <img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
+                        <img class="group list-group-image img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}" />
                     </div>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
@@ -85,7 +85,7 @@
             </div>
             {% endfor %}
             <div class="row">
-                <div class="col">
+                <div class="col-12">
                     <a href="#" id="loadMore2" class="load-more">Load More</a>
                 </div>
             </div>
