@@ -1,12 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
-    </div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -18,36 +14,89 @@
                 <hr>
             </div>
         </div>
-        {{ profile.user.email }}
-        {{ profile.is_creator }}
+    </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                <h3>My Donations</h3>
-                {% if not orders %}
-                    <p>No donations have been made yet</p>
-                {% else %}
-                    {% for order in orders %}
-                    <p>{{ order.stripe_pid }}</p>
-                    <p>{{ order.donation_item }}</p>
-                    <p>{{ order.donation_item.amount }}</p>
-                    {% endfor %}
-                {% endif %}
-                </div>
-            {% if profile.is_creator %}
-                <div class="col-md-4">
-                <h3>My Game Projects</h3>
-                {% if not game_projects %}
-                    <p>No projects created yet</p>
-                {% else %}
-                    {% for project in game_projects %}
-                        <p>{{ project.title }}</p>
-                        <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
-                    {% endfor %}
-                {% endif %}
-                </div>
-            {% endif %}
+    <div class="container">
+    <h3>My Donations</h3>
+        <div class="row view-group">
+            {% if not orders %}
+            <div class="col">
+                <p>No donations have been made yet</p>
             </div>
+            {% else %}
+                {% for order in orders %}
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
+                    </div>
+                    <div class="caption card-body">
+                        <h4 class="group card-title inner list-group-item-heading">
+                            Game Project: {{ order.gameproject.title }}</h4>
+                        <p class="group inner list-group-item-text">
+                            Donation Type: {{ order.donation_item }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    Donation Amount: {{ order.donation_item.amount }}</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <a class="btn btn-primary" href="{% url 'project_detail' order.gameproject.id %}">Project Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <a href="#" id="loadMore" class="load-more">Load More</a>
+        {% endif %}
         </div>
+    </div>
+
+    {% if profile.is_creator %}
+    <div class="container">
+    <h3>My Game Projects</h3>
+        <div class="row view-group">
+        {% if not game_projects %}
+            <div class="col">
+            <p>No projects created yet</p>
+            </div>
+        {% else %}
+            {% for project in game_projects %}
+                <div class="item2 col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
+                    </div>
+                    <div class="caption card-body">
+                        <h4 class="group card-title inner list-group-item-heading">
+                            Game Project: {{ project.title }}</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    Donations total: </p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col">
+                    <a href="#" id="loadMore2" class="load-more">Load More</a>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'profiles/js/profile.js' %}"></script>
 {% endblock %}
