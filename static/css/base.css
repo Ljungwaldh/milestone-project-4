@@ -1,4 +1,37 @@
 
+html {
+    height: 100%;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, .navbar-brand {
+    font-family: 'Press Start 2P', cursive;
+}
+
+h1 {
+    font-size: 1.7rem;
+}
+
+.navbar-brand {
+    font-size: 1rem;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Inconsolata', monospace;
+}
+
+/*  Header for landing page  */
+
+
+
 /*  How It Works section of landing page  */
 
 .section-title {
@@ -37,9 +70,8 @@
 	width: 50px;
 	height: 2px;
 	background-color: #FF7200;
-	left: 0;
-	bottom: 0;
 	left: 50%;
+	bottom: 0;
 	margin-left: -25px;
 }
 
@@ -193,7 +225,7 @@
 }
 
 .allauth-form-inner-content input {
-    border-color: #000;
+    border-color: #054A91;
     border-radius: 0;
 }
 
@@ -221,8 +253,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #000;
-    border: 1px solid #000;
+    background-color: #007bff;
+    border: 1px solid #007bff;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -235,8 +267,8 @@
 .allauth-form-inner-content button:hover,
 .allauth-form-inner-content input[type='submit']:hover {	
 	color: #fff;
-    background-color: #222;
-    border-color: #222;
+    background-color: #054A91;
+    border-color: #054A91;
 }
 
 .allauth-form-inner-content a {
