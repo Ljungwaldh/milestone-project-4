@@ -9,3 +9,5 @@ class ProjectForm(forms.ModelForm):
         fields = ('title', 'description', 'owner', 'image')
 
     image = forms.ImageField(label='Image', required=False)
+    title = forms.CharField(label='Title')
+    description = forms.CharField(widget=forms.Textarea, label='Description')
