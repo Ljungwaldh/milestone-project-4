@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from profiles.models import Profile
 from django.contrib import messages
 from .forms import ProjectForm
+from django.db.models import Q
 
 
 @login_required
@@ -11,11 +12,22 @@ def all_projects(request):
 
     game_projects = GameProject.objects.all()
     profile = get_object_or_404(Profile, user=request.user)
+    query = None
+
+    if 'q' in request.GET:
+        query = request.GET['q']
+        if not query:
+            messages.error(request, "You didn't enter any search criteria!")
+            return redirect(reverse('all_projects'))
+
+        queries = Q(title__icontains=query) | Q(description__icontains=query) | Q(owner__user__username__icontains=query)
+        game_projects = game_projects.filter(queries)
 
     template = 'gameproject/all_projects.html'
     context = {
         'game_projects': game_projects,
-        'profile': profile
+        'profile': profile,
+        'search_term': query
     }
 
     return render(request, template, context)
