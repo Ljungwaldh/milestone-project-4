@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'gameproject/css/gameproject.css' %}">
+{% endblock %}
+
 {% block content %}
 <div>
 {{ game_project.title }}
 {{ game_project.description }}
 {{ game_project.owner }}
+{% if game_project.image %}
 <img src="{{ game_project.image.url }}" alt="{{ game_project.title }}">
+{% endif %}
 </div>
 
 <div>

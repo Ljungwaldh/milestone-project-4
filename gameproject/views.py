@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import GameProject, Donation
+from checkout.models import Order
 from django.contrib.auth.decorators import login_required
 from profiles.models import Profile
 from django.contrib import messages
@@ -22,6 +23,11 @@ def all_projects(request):
 
         queries = Q(title__icontains=query) | Q(description__icontains=query) | Q(owner__user__username__icontains=query)
         game_projects = game_projects.filter(queries)
+
+    for game_project in game_projects:
+        game_project.total_amount = 0
+        for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+            game_project.total_amount += order.donation_item.amount
 
     template = 'gameproject/all_projects.html'
     context = {

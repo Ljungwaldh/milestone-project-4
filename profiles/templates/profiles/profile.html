@@ -28,7 +28,9 @@
             <div class="item col-xs-4 col-lg-4">
                 <div class="thumbnail card">
                     <div class="img-event">
-                        <img class="group list-group-image img-fluid" src="{{ order.game_project.image.url }}" alt="{{ order.game_project.title }}" />
+                    {% if order.game_project.image %}
+                        <img class="group list-group-image img-fluid" src="{{ order.game_project.image.url }}" alt="{{ order.game_project.title }}"/>
+                    {% endif %}
                     </div>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
@@ -72,7 +74,9 @@
                 <div class="item2 col-xs-4 col-lg-4">
                 <div class="thumbnail card">
                     <div class="img-event">
-                        <img class="group list-group-image img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}" />
+                    {% if project.image %}
+                        <img class="group list-group-image img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}"/>
+                    {% endif %}
                     </div>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">

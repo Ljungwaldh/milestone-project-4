@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'gameproject/css/gameproject.css' %}">
+{% endblock %}
+
 {% block content %}
 <div>
 <h2>Create Game Project</h2>
