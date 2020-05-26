@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col">
                 <hr>
-                <h2 class="mb-4">My Profile</h2>
+                <h2 class="mb-4">{{ profile.user.username }}</h2>
                 <hr>
             </div>
         </div>
@@ -28,29 +28,35 @@
             <div class="item col-xs-4 col-lg-4">
                 <div class="thumbnail card">
                     <div class="img-event">
-                        <img class="group list-group-image img-fluid" src="http://placehold.it/400x250/000/fff" alt="" />
+                        <img class="group list-group-image img-fluid" src="{{ order.game_project.image.url }}" alt="{{ order.game_project.title }}" />
                     </div>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
-                            Game Project: {{ order.gameproject.title }}</h4>
+                            Game Project: {{ order.game_project.title }}</h4>
                         <p class="group inner list-group-item-text">
                             Donation Type: {{ order.donation_item }}</p>
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <p class="lead">
-                                    Donation Amount: {{ order.donation_item.amount }}</p>
+                                    Donated: €{{ order.donation_item.amount }}</p>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <a class="btn btn-primary" href="{% url 'project_detail' order.gameproject.id %}">Project Detail</a>
+                                <a class="btn btn-primary" href="{% url 'project_detail' order.game_project.id %}">Project Detail</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
-            <a href="#" id="loadMore" class="load-more">Load More</a>
         {% endif %}
         </div>
+        {% if orders %}
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <a href="#" id="loadMore" class="load-more">Load More</a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     {% if profile.is_creator %}
@@ -74,7 +80,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <p class="lead">
-                                    Donations total: </p>
+                                    Donations total: €{{ project.total_amount }} </p>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
@@ -84,13 +90,15 @@
                 </div>
             </div>
             {% endfor %}
-            <div class="row">
-                <div class="col-12">
-                    <a href="#" id="loadMore2" class="load-more">Load More</a>
-                </div>
-            </div>
         {% endif %}
         </div>
+        {% if game_projects %}
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <a href="#" id="loadMore2" class="load-more">Load More</a>
+            </div>
+        </div>
+        {% endif %}
     </div>
     {% endif %}
 

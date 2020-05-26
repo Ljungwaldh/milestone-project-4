@@ -16,8 +16,10 @@ def profile(request):
 
     game_projects = GameProject.objects.filter(owner=profile).order_by('-created_at')
 
-    project_orders = GameProject.objects.filter(owner=profile).Order_set.all()
-    print(project_orders)
+    for game_project in game_projects:
+        game_project.total_amount = 0
+        for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+            game_project.total_amount += order.donation_item.amount
 
     template = 'profiles/profile.html'
     context = {
