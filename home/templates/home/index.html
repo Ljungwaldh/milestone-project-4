@@ -5,7 +5,7 @@
     <header class="jumbotron my-4">
       <h1 class="display-5">Gamestarter</h1>
       <p class="lead">The new birthplace of video games</p>
-      <a href="#" class="btn btn-primary btn-lg">Learn More</a>
+      <a href="#services" class="btn btn-primary btn-lg">Learn More</a>
     </header>
 {% endblock %}
 
@@ -110,19 +110,20 @@
                </div>
             </div>
             <div class="row">
-               <div class="col-lg-4 col-md-6">
-                  <!-- Single Service -->
-                  <div class="single-service">
-                     <i class="fas fa-hand-holding-medical"></i>
-                     <h4>Want to Contribute?</h4>
-                     <p>Just register, have a look through game projects listed, donate to those that interest you, and follow updates via the project's blog</p>
-                  </div>
-               </div>
+                
+                    <div class="col-lg-4 col-md-6">
+                        <!-- Single Service -->
+                        <div class="single-service">
+                            <i class="fas fa-hand-holding-medical"></i>
+                            <a href="{% url 'all_projects' %}"><h4>Want to Contribute?</h4></a>
+                            <p>Just register, have a look through game projects listed, donate to those that interest you, and follow updates via the project's blog</p>
+                        </div>
+                    </div>
                <div class="col-lg-4 col-md-6">
                   <!-- Single Service -->
                   <div class="single-service">
                      <i class="fa fa-gears"></i>
-                     <h4>A Game Developer/Studio?</h4>
+                     <a href="{% url 'account_signup' %}"><h4>A Game Developer/Studio?</h4></a>
                      <p>Register as a creator, add a project to the project list, and be sure to update donars about development via the blog feature</p>
                   </div>
                </div>
@@ -130,8 +131,8 @@
                   <!-- Single Service -->
                   <div class="single-service">
                      <i class="far fa-newspaper"></i>
-                     <h4>Blog and Rewards</h4>
-                     <p>Creators can create content for donars via the blog feature, as well as communicate rewards for donars/potential donars</p>
+                     <h4>Blog and Rewards (Coming Soon)</h4>
+                     <p>Creators will be able to communicate with donars through a blog feature as well as be able to communicate rewards</p>
                   </div>
                </div>
             </div>
@@ -178,8 +179,8 @@
 						<div class="col-md-10 offset-md-1 d-md-flex d-block text-center text-lg-left">
 							<img class="rounded-circle" src="{% static 'images/testimonial-2.jpg' %}" style="width: 100px;height:100px;">
 							<div class="feedback-text pl-3">
-								<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit!</p>
-								<small>Someone famous</small>
+								<p>Video games coming from the corporate publishers these days are too predictable - Gamestarter has helped bring new ideas!</p>
+								<small>Sofia, Contributor</small>
 							</div>
 						</div>
 					</div>
@@ -192,8 +193,8 @@
 					<div class="col-md-10 offset-md-1 d-md-flex d-block text-center text-lg-left">
 						<img class="rounded-circle" src="{% static 'images/testimonial-3.jpg' %}" style="width: 100px;height:100px;">
 						<div class="feedback-text pl-3">
-							<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit!</p>
-							<small>Someone famous</small>
+							<p>Finally, somewhere where our studio can develop games that can be truly fan-driven from the start</p>
+							<small>Greg, Game Developer</small>
 						</div>
 					</div>
                 </div>
