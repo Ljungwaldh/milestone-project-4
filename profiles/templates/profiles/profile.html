@@ -25,30 +25,32 @@
             </div>
             {% else %}
                 {% for order in orders %}
-            <div class="item col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event">
-                    {% if order.game_project.image %}
-                        <img class="group list-group-image img-fluid" src="{{ order.game_project.image.url }}" alt="{{ order.game_project.title }}"/>
-                    {% endif %}
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Game Project: {{ order.game_project.title }}</h4>
-                        <p class="group inner list-group-item-text">
-                            Donation Type: {{ order.donation_item }}</p>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <p class="lead">
-                                    Donated: €{{ order.donation_item.amount }}</p>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <a class="btn btn-primary" href="{% url 'project_detail' order.game_project.id %}">Project Detail</a>
+                    {% if order.status == 'PA' %}
+                <div class="item col-xs-4 col-lg-4">
+                    <div class="thumbnail card">
+                        <div class="img-event">
+                        {% if order.game_project.image %}
+                            <img class="group list-group-image img-fluid" src="{{ order.game_project.image.url }}" alt="{{ order.game_project.title }}"/>
+                        {% endif %}
+                        </div>
+                        <div class="caption card-body">
+                            <h4 class="group card-title inner list-group-item-heading">
+                                Game Project: {{ order.game_project.title }}</h4>
+                            <p class="group inner list-group-item-text">
+                                Donation Type: {{ order.donation_item }}</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead">
+                                        Donated: €{{ order.donation_item.amount }}</p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <a class="btn btn-primary" href="{% url 'project_detail' order.game_project.id %}">Project Detail</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                {% endif %}
             {% endfor %}
         {% endif %}
         </div>

@@ -49,12 +49,14 @@
                     <li class="list-group-item text-center"><h3>{{ option.title }}</h3></li>
                     <li class="list-group-item text-center"><p>{{ option.description }}</p></li>
                     <li class="list-group-item text-center"><h4 class="text-primary">€{{ option.amount }}</h4></li>
-                    <form action="{% url 'donate' %}" method="GET">
+                </ul>
+                <div class="row justify-content-center my-3">
+                <form action="{% url 'donate' %}" method="GET">
                         <input type="hidden" value="{{ option.id }}" name="donation_type">
                         <input type="hidden" value="{{ game_project.id }}" name="game_project">
-                    <li class="list-group-item text-center"><button type="submit" class="btn btn-primary">Donate to {{ game_project.title }}</button></li>
-                    </form>
-                </ul>
+                    <button type="submit" class="btn btn-primary">Select Donation</button>
+                </form>
+                </div>
             </div>
         {% endfor %}
     {% endif %}

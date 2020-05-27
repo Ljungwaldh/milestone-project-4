@@ -30,6 +30,11 @@ def donate(request):
         game_project = request.GET.get('game_project')
         donation = get_object_or_404(Donation, pk=donation_type)
         project = get_object_or_404(GameProject, pk=game_project)
+        profile = get_object_or_404(Profile, user=request.user)
+
+        if profile == project.owner:
+            messages.error(request, 'Sorry, you cannot donate to your own project')
+            return redirect(reverse('all_projects'))
 
         # Create Stripe Payment Intent
         stripe.api_key = settings.STRIPE_SECRET_KEY
