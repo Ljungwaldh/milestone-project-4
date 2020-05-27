@@ -6,8 +6,25 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = GameProject
-        fields = ('title', 'description', 'owner', 'image')
+        fields = ('title', 'description', 'image')
 
-    image = forms.ImageField(label='Image', required=False)
-    title = forms.CharField(label='Title')
-    description = forms.CharField(widget=forms.Textarea, label='Description')
+    image = forms.ImageField(label='Upload Image', required=False)
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'title': 'Give your project a gripping title',
+            'description': 'Describe what it is all about - get readers/donars excited!',
+            'image': 'Upload Image',
+        }
+
+        self.fields['title'].widget.attrs['autofocus'] = True
+        for field in self.fields:
+            placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+        if field != 'image':
+            self.fields[field].label = False
