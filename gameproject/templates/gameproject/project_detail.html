@@ -6,35 +6,58 @@
 {% endblock %}
 
 {% block content %}
-<div>
-{{ game_project.title }}
-{{ game_project.description }}
-{{ game_project.owner }}
-{% if game_project.image %}
-<img src="{{ game_project.image.url }}" alt="{{ game_project.title }}">
-{% endif %}
+<div class="container-fluid mt-5 mb-5">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
+        <h2>Project Details</h2>
+            <div class="image-container my-5">
+                {% if game_project.image %}
+                        <img class="card-img-top img-fluid" src="{{ game_project.image.url }}" alt="{{ game_project.title }}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="project-details-container mb-5 mt-md-5">
+                <h3 class="mb-0">{{ game_project.title }}</h3>
+                    <p class="lead mb-0 text-left font-weight-bold">Donations Total: ${{ game_project.total_amount }}</p>
+                    <p class="small mt-1 mb-0">
+                            <i class="fas fa-user-tag"></i> {{ game_project.owner }}
+                    </p>
+                    <p class="mt-3">{{ game_project.description }}</p>
+                    {% if game_project.owner == profile %}
+                    <small class="ml-3">
+                        <a href="{% url 'edit_project' game_project.id %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update</a>
+                        <a href="{% url 'delete_project' game_project.id %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
+                    </small>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-{% if game_project.owner != profile %}
-    {% for option in donation_options %}
-    <p>{{ option.title }}</p>
-    <p>{{ option.amount }}</p>
-    <form action="{% url 'donate' %}" method="GET">
-        <input type="hidden" value="{{ option.id }}" name="donation_type">
-        <input type="hidden" value="{{ game_project.id }}" name="game_project">
-    <button type="submit" class="btn btn-primary">Donate to {{ game_project.title }}</button>
-    </form>
-    {% endfor %}
-{% endif %}
+<div class="container mt-5 mb-5">
+	<div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
+        <h2>Donation Options</h2>
+        </div>
+	</div>
+    <div class="row">
+    {% if game_project.owner != profile %}
+        {% for option in donation_options %}
+            <div class="col-12 col-md-4 mt-2 mb-2">
+                <ul class="list-group">
+                    <li class="list-group-item text-center"><h3>{{ option.title }}</h3></li>
+                    <li class="list-group-item text-center"><p>{{ option.description }}</p></li>
+                    <li class="list-group-item text-center"><h4 class="text-primary">€{{ option.amount }}</h4></li>
+                    <form action="{% url 'donate' %}" method="GET">
+                        <input type="hidden" value="{{ option.id }}" name="donation_type">
+                        <input type="hidden" value="{{ game_project.id }}" name="game_project">
+                    <li class="list-group-item text-center"><button type="submit" class="btn btn-primary">Donate to {{ game_project.title }}</button></li>
+                    </form>
+                </ul>
+            </div>
+        {% endfor %}
+    {% endif %}
+	</div>
 </div>
-<div>
-{% if game_project.owner == profile %}
-<a href="{% url 'edit_project' game_project.id %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update</a>
-<a href="{% url 'delete_project' game_project.id %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
-{% endif %}
-</div>
-
-
-
 {% endblock %}

@@ -46,6 +46,10 @@ def project_detail(request, project_id):
     donation_options = Donation.objects.all()
     profile = get_object_or_404(Profile, user=request.user)
 
+    game_project.total_amount = 0
+    for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+        game_project.total_amount += order.donation_item.amount
+
     template = 'gameproject/project_detail.html'
     context = {
         'game_project': game_project,
