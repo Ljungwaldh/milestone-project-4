@@ -75,6 +75,8 @@ def donate(request):
 
 @login_required
 def donate_success(request):
+
+    
     template = 'checkout/checkout_success.html'
     context = {}
     return render(request, template, context)
