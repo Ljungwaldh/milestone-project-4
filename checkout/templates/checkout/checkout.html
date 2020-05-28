@@ -8,7 +8,9 @@
         <h2>Donation Details</h2>
             <div class="image-container my-5">
                 {% if project.image %}
-                        <img class="card-img-top img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}">
+                    <img class="card-img-top img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}">
+                {% else %}
+                    <img class="group list-group-image img-fluid" src="{{ static 'images/noimage.png' }}" alt="{{ project.title }}"/>
                 {% endif %}
             </div>
         </div>

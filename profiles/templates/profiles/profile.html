@@ -31,6 +31,8 @@
                         <div class="img-event">
                         {% if order.game_project.image %}
                             <img class="group list-group-image img-fluid" src="{{ order.game_project.image.url }}" alt="{{ order.game_project.title }}"/>
+                        {% else %}
+                            <img class="group list-group-image img-fluid" src="{{ static 'images/noimage.png' }}" alt="{{ order.game_project.title }}"/>
                         {% endif %}
                         </div>
                         <div class="caption card-body">
@@ -78,6 +80,8 @@
                     <div class="img-event">
                     {% if project.image %}
                         <img class="group list-group-image img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}"/>
+                    {% else %}
+                        <img class="group list-group-image img-fluid" src="{{ static 'images/noimage.png' }}" alt="{{ project.title }}"/>
                     {% endif %}
                     </div>
                     <div class="caption card-body">
