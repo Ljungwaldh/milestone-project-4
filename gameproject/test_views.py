@@ -33,7 +33,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(template_name='gameproject/project_detail.html')
 
-    def test_get_add_project_page(self):
+    def test_get_addproject_page_and_non_creator_is_redirected_away(self):
 
         user = User.objects.create(username='temporary',
                                    email='temp@temp.com',
@@ -45,4 +45,10 @@ class TestViews(TestCase):
         response = self.client.get('/gameproject/add_project', follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(template_name='gameproject/add_project.html')
-
+        response = self.client.get('/gameproject/add_project')
+        # my_url = '/'
+        # response = self.client.get('/', follow=True)
+        # self.assertRedirects(response, f'/accounts/login/?next={my_url}')
+        self.assertRedirects(response, response['Location'])
+        print(response['Location'])
+        self.assertEqual(response.status_code, 302)
