@@ -14,7 +14,7 @@
                 {% if game_project.image %}
                     <img class="card-img-top img-fluid" src="{{ game_project.image.url }}" alt="{{ game_project.title }}">
                 {% else %}
-                    <img class="group list-group-image img-fluid" src="{{ static 'images/noimage.png' }}" alt="{{ game_project.title }}"/>
+                    <img class="group list-group-image img-fluid" src="{% static 'images/noimage.png' %}" alt="{{ game_project.title }}"/>
                 {% endif %}
             </div>
         </div>

@@ -62,7 +62,7 @@
                 {% if project.image %}
                     <img class="group list-group-image img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}"/>
                 {% else %}
-                    <img class="group list-group-image img-fluid" src="{{ static 'images/noimage.png' }}" alt="{{ project.title }}"/>
+                    <img class="group list-group-image img-fluid" src="{% static 'images/noimage.png' %}" alt="{{ project.title }}"/>
                 {% endif %}
                 </div>
                 <div class="caption card-body">
