@@ -9,9 +9,10 @@ class Order(models.Model):
 
     STATUS = [
         ('PE', 'Pending'),
-        ('SP', 'Send Payment'),
         ('PA', 'Paid'),
-        ('CA', 'Cancelled'),
+        ('PS', 'Payment Sent'),
+        ('FA', 'Failed'),
+        ('CA', 'Cancelled')
     ]
 
     user = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL, related_name='donations')
