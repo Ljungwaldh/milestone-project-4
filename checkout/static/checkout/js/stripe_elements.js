@@ -57,7 +57,7 @@ form.addEventListener('submit', function(ev) {
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
-        'message': 'I wannaaaaa ppaaayyyyyy'
+        'message': 'Payment sent'
     };
 
     var url = '/checkout/client-sent-payment-to-stripe';
@@ -81,8 +81,8 @@ form.addEventListener('submit', function(ev) {
                 $('#submit-button').attr('disabled', false);
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
-                    // form.submit();
-                    window.location.replace("/checkout/donate_success");
+                    form.submit();
+                    // window.location.replace("/checkout/donate_success");
                 }
             }
         });

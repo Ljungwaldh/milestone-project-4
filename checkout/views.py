@@ -23,6 +23,13 @@ def client_sent_payment(request):
 @login_required
 def donate(request):
 
+    if request.method == 'POST':
+
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        order = get_object_or_404(Order, stripe_pid=pid)
+
+        return redirect(reverse('donate_success', args=[order.order_number]))
+
     if request.method == 'GET':
 
         # Getting data from the client
@@ -74,11 +81,16 @@ def donate(request):
 
 
 @login_required
-def donate_success(request):
+def donate_success(request, order_number):
+    """
+    Handle successful checkouts
+    """
+    order = get_object_or_404(Order, order_number=order_number)
 
-    
     template = 'checkout/checkout_success.html'
-    context = {}
+    context = {
+        'order': order
+    }
     return render(request, template, context)
 
 
