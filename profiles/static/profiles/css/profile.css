@@ -1,5 +1,4 @@
 .view-group {
-    display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: row;
     flex-direction: row;
@@ -74,11 +73,11 @@
 #loadMore, #loadMore2 {
     padding: 10px;
     text-align: center;
-    background-color: #33739E;
-    color: #fff;
+    background-color: #FF7200;;
+    color: #000;
     border-width: 0 1px 1px 0;
     border-style: solid;
-    border-color: #fff;
+    border-color: #FF7200;
     box-shadow: 0 1px 1px #ccc;
     transition: all 600ms ease-in-out;
     -webkit-transition: all 600ms ease-in-out;
@@ -88,7 +87,7 @@
 
 #loadMore:hover, #loadMore2:hover {
     background-color: #fff;
-    color: #33739E;
+    color: #FF7200;;
 }
 
 .item, .item2 {

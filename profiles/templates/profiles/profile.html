@@ -39,11 +39,12 @@
                             <h4 class="group card-title inner list-group-item-heading">
                                 Game Project: {{ order.game_project.title }}</h4>
                             <p class="group inner list-group-item-text">
-                                Donation Type: {{ order.donation_item }}</p>
+                                Donation Type: {{ order.donation_item }}<br>
+                                Donated at: {{ order.created_at }}</p>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <p class="lead">
-                                        Donated: €{{ order.donation_item.amount }}</p>
+                                        Donated:<br>€{{ order.donation_item.amount }}</p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <a class="btn btn-primary" href="{% url 'project_detail' order.game_project.id %}">Project Detail</a>
