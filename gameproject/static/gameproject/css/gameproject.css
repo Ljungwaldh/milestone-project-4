@@ -1,5 +1,4 @@
 .view-group {
-    display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: row;
     flex-direction: row;

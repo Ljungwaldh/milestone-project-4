@@ -67,14 +67,11 @@
   </div>
 </nav>
 
-    {% if message.error %}
+    {% if messages %}
         <div class="message-container">
-        {{ message.error }}
-        </div>
-    {% endif %}
-    {% if message.success %}
-        <div class="message-container">
-        {{ message.success }}
+        {% for message in messages %}
+            <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+        {% endfor %}
         </div>
     {% endif %}
 
