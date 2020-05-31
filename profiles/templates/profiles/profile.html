@@ -17,7 +17,7 @@
     </div>
 
     <div class="container">
-    <h3>My Donations</h3>
+        <h3>My Donations</h3>
         <div class="row view-group">
             {% if not orders %}
             <div class="col">
@@ -72,34 +72,34 @@
         <div class="row view-group">
         {% if not game_projects %}
             <div class="col">
-            <p>No projects created yet</p>
+                <p>No projects created yet</p>
             </div>
         {% else %}
             {% for project in game_projects %}
                 <div class="item2 col-xs-4 col-lg-4">
-                <div class="thumbnail card">
-                    <div class="img-event">
-                    {% if project.image %}
-                        <img class="group list-group-image img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}"/>
-                    {% else %}
-                        <img class="group list-group-image img-fluid" src="{% static 'images/noimage.png' %}" alt="{{ project.title }}"/>
-                    {% endif %}
-                    </div>
-                    <div class="caption card-body">
-                        <h4 class="group card-title inner list-group-item-heading">
-                            Game Project: {{ project.title }}</h4>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <p class="lead">
-                                    Donations total: €{{ project.total_amount }} </p>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
+                    <div class="thumbnail card">
+                        <div class="img-event">
+                        {% if project.image %}
+                            <img class="group list-group-image img-fluid" src="{{ project.image.url }}" alt="{{ project.title }}"/>
+                        {% else %}
+                            <img class="group list-group-image img-fluid" src="{% static 'images/noimage.png' %}" alt="{{ project.title }}"/>
+                        {% endif %}
+                        </div>
+                        <div class="caption card-body">
+                            <h4 class="group card-title inner list-group-item-heading">
+                                Game Project: {{ project.title }}</h4>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead">
+                                        Donations total: €{{ project.total_amount }} </p>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
+                                    <a class="btn btn-primary" href="{% url 'project_detail' project.id %}">Project Detail</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         {% endif %}
         </div>

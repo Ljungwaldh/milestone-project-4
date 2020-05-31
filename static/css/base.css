@@ -1,3 +1,4 @@
+/* General Styling */
 
 html {
     height: 100%;
@@ -27,10 +28,6 @@ h5,
 h6 {
     font-family: 'Inconsolata', monospace;
 }
-
-/*  Header for landing page  */
-
-
 
 /*  How It Works section of landing page  */
 
@@ -273,4 +270,8 @@ h6 {
 
 .allauth-form-inner-content a {
 	color: #17a2b8; /* text-info */
+}
+
+.page-container {
+    min-height: 75vh;
 }

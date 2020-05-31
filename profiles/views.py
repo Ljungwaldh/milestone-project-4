@@ -1,10 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.db.models import Sum
 
 from .models import Profile
 from checkout.models import Order
-from gameproject.models import GameProject, Donation
+from gameproject.models import GameProject
 
 
 @login_required

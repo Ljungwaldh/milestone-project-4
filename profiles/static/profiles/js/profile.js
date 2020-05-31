@@ -1,3 +1,5 @@
+// Two functions for Load More buttons, loading three objects/cards at a time
+
 $(function () {
     $(".item").slice(0, 3).show();
     $("#loadMore").on('click', function (e) {

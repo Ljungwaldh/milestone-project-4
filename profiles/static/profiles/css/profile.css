@@ -1,3 +1,4 @@
+/* Card styling for Order/Game Project objects */
 .view-group {
     display: flex;
     -ms-flex-direction: row;
@@ -59,6 +60,8 @@
 {
     clear: both;
 }
+
+/* Load More button */
 
 .load-more, .loadmore:visited {
     color: #33739E;

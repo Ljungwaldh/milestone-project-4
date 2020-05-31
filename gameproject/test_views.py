@@ -46,9 +46,5 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(template_name='gameproject/add_project.html')
         response = self.client.get('/gameproject/add_project')
-        # my_url = '/'
-        # response = self.client.get('/', follow=True)
-        # self.assertRedirects(response, f'/accounts/login/?next={my_url}')
         self.assertRedirects(response, response['Location'])
-        print(response['Location'])
         self.assertEqual(response.status_code, 302)
