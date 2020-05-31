@@ -10,9 +10,9 @@
     <div class="row">
         <div class="col-12 col-md-6">
             <h2>Create Game Project</h2>
-            <form action="{% url 'add_project' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'edit_project' game_project.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ project_form|crispy }}
+                {{ game_project_form|crispy }}
                 <div class="text-right">
                 <a class="btn btn-outline-black rounded-0" href="{% url 'all_projects' %}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Update Project</button>
@@ -21,6 +21,4 @@
         </div>
     </div>
 </div>
-
-
 {% endblock %}

@@ -91,36 +91,39 @@ def add_project(request):
 
 
 @login_required
-def edit_project(request, project_id):
+def edit_project(request, game_project_id):
 
     profile = get_object_or_404(Profile, user=request.user)
-    project = get_object_or_404(GameProject, pk=project_id)
+    game_project = get_object_or_404(GameProject, pk=game_project_id)
 
     if not profile.is_creator:
         messages.error(request, 'Sorry, only creators can do that.')
         return redirect(reverse('home'))
-    if project.owner != profile:
+    if game_project.owner != profile:
         messages.error(request, 'Sorry, only the project owner can do that.')
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        project_form = ProjectForm(request.POST, request.FILES, instance=project)
-        if project_form.is_valid():
-            project_form.save(commit=False)
-            project.owner = profile
-            project.save()
+        game_project_form = ProjectForm(request.POST, request.FILES, instance=game_project)
+        if game_project_form.is_valid():
+            game_project_form.save(commit=False)
+            game_project.owner = profile
+            game_project.total_amount = 0
+            for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+                game_project.total_amount += order.donation_item.amount
+            game_project.save()
             messages.success(request, 'Successfully updated project!')
-            return redirect(reverse('project_detail', args=[project.id]))
+            return redirect(reverse('project_detail', args=[game_project.id]))
         else:
             messages.error(request, 'Failed to update project. Please ensure the form is valid.')
     else:
-        project_form = ProjectForm(instance=project)
-        messages.info(request, f'You are editing {project.title}')
+        game_project_form = ProjectForm(instance=game_project)
+        messages.info(request, f'You are editing {game_project.title}')
 
     template = 'gameproject/edit_project.html'
     context = {
-        'project_form': project_form,
-        'project': project,
+        'game_project_form': game_project_form,
+        'game_project': game_project,
     }
 
     return render(request, template, context)

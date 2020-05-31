@@ -67,8 +67,15 @@
   </div>
 </nav>
 
-    {% if messages %}
-        <div class="message-container"></div>
+    {% if message.error %}
+        <div class="message-container">
+        {{ message.error }}
+        </div>
+    {% endif %}
+    {% if message.success %}
+        <div class="message-container">
+        {{ message.success }}
+        </div>
     {% endif %}
 
     {% block page_header %}
