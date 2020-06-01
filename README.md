@@ -122,4 +122,55 @@ The developer opted to remove the Blog and Comment functionality of the donation
 This data schema best represents the final product on a high level, where screenshots will be provided in the **Features** sections. The data schema will be discussed in further detail in the **Information Architecture** section.
 
 ## Features
+### Existing Features
+#### Features present on every page
+**Navbar**:
 
+ - Simple navbar that presents two items when a new visitor enters the website that isn't logged in, these being 'Register and 'Login'. If logged in, options shown are 'My Profile', 'Logout' and 'Find Game Projects'. The 'Gamestarter' icon in the navbar will always redirect to the landing page.
+![navbar large screen](https://i.ibb.co/QKZ4XBX/navbar-large-screen.png)
+ - Navbar, on smaller devices, switches the navbar items as items within a dropdown, with the dropdown button displayed as a burger icon.
+![navbar small screen](https://i.ibb.co/kQmnf3d/navbar-small-screen.png)
+
+**Footer**:
+
+ - Simple Footer with same colour as navbar for consistency. includes copyright information and an email of the website owner
+ - Social media icons included as well for further channels of communication/content related to the website
+![Footer](https://i.ibb.co/V2sD5nm/footer.png)
+
+**Messages**
+
+ - Helpful messages appear just below the navbar upon certain actions being completed (be it if the user has logged in, if they don't have access to a certain link, if a project has been successfully created/edited etc.). Examples of this can be seen in a number of screenshots below for other features.
+
+#### Landing Page
+**Jumbotron Header with Logo**
+
+ - Simple header with Logo to instantly engage visitors as to the
+   website they have reached
+   'Learn More' call-to-action leads to information section lower down
+
+**Introduction and website pitch**
+
+ - Three separate short paragraphs with accompanying images to help introduce and draw in new visitors
+
+**Information Section - What is Gamestarter and How it Works**
+
+ - Two separate Headings with three content boxes underneath each one. The first three boxes look to explain what Gamestarter is in terms of its Purpose, Goal, and what it is in practical terms. 
+ - Seconding heading 'How it Works' has the first two boxes hyperlinked to relevant locations for the content (eg. 'Want to Contribute?' directing to 'Find Game Projects' in order to get a user directly to projects they can donate towards, if logged in). 
+ - Hover effect on the boxes to give an appealing visual effect and subtle user feedback on what they are currently focused on
+
+**Testimonial Section**
+
+ - Total of three testimonials in a sliding carousel, each with a profile picture and a short text giving a positive review of Gamestarter
+![landing page 1](https://i.ibb.co/MBK1hgg/landing-page-1.png)
+![landing page 2](https://i.ibb.co/dJ7M4wD/landing-page-2.png)
+![landing page 3](https://i.ibb.co/X20c4pb/landing-page-3.png)
+![landing page 4](https://i.ibb.co/VCsjSTY/landing-page-4.png)
+
+#### Register page
+
+ - Simple signup form where users enter in their email address, choose and username and password, and check the checkbox if the user wishes to signup as a Creator
+ - Foundation of the form is from [django-allauth](https://django-allauth.readthedocs.io/en/latest/index.html), while the checkbox for signing up as a Creator is a custom addition to the signup form
+![register page](https://i.ibb.co/71xPw43/register.png)
+Part of registration process will be to verify the email used for signing up, where users will be directed to this page:
+![verify email](https://i.ibb.co/RD1T8Kz/verify-email-1.png)
+Once the user obtains the link from mail sent to their email, they'll be able to verify it, and then be successfully registered. A useful message under the navbar indicates that a confirmation email has been sent to the email provided in the sign up form.
