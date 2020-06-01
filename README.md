@@ -146,7 +146,7 @@ This data schema best represents the final product on a high level, where screen
 
  - Simple header with Logo to instantly engage visitors as to the
    website they have reached
-   'Learn More' call-to-action leads to information section lower down
+ - 'Learn More' call-to-action leads to information section lower down
 
 **Introduction and website pitch**
 
