@@ -15,7 +15,8 @@ class CustomSignupForm(SignupForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['is_creator'] = forms.BooleanField(label='Signup as a Creator', required=False)
+        self.fields['is_creator'] = (
+            forms.BooleanField(label='Signup as a Creator', required=False))
 
     def save(self, request):
         is_creator = self.cleaned_data.pop('is_creator')

@@ -63,6 +63,8 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 ROOT_URLCONF = 'gamestarter.urls'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

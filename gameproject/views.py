@@ -56,7 +56,6 @@ def project_detail(request, project_id):
         'donation_options': donation_options,
         'profile': profile,
     }
-
     return render(request, template, context)
 
 
