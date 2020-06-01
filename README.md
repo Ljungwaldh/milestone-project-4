@@ -170,7 +170,32 @@ This data schema best represents the final product on a high level, where screen
 
  - Simple signup form where users enter in their email address, choose and username and password, and check the checkbox if the user wishes to signup as a Creator
  - Foundation of the form is from [django-allauth](https://django-allauth.readthedocs.io/en/latest/index.html), while the checkbox for signing up as a Creator is a custom addition to the signup form
+ - Allauth provides built-in functionality to give user feedback on security measures, one being to ask the user for another password if it is too similar to the username and/or email provided
 ![register page](https://i.ibb.co/71xPw43/register.png)
+
 Part of registration process will be to verify the email used for signing up, where users will be directed to this page:
+
 ![verify email](https://i.ibb.co/RD1T8Kz/verify-email-1.png)
+
 Once the user obtains the link from mail sent to their email, they'll be able to verify it, and then be successfully registered. A useful message under the navbar indicates that a confirmation email has been sent to the email provided in the sign up form.
+
+#### Login page
+
+ - Login page where users log in with their Username or email, followed by their password
+ - Allauth provides built-in feedback on incorrect credentials
+![login page](https://i.ibb.co/bJdLQFz/login.png)
+
+#### Profile page
+
+ - Differs depending on if the user signs up as a creator or not. Normal users get one dashboard for previous donations made. Creators will have two dashboards, one for donation history and the other for game projects they've added to the platform that are currently running
+ - A 'Load More' button is present for each dashboard, loading more items if they exist, loading three items at a time. This button has a hover effect to give subtle user feedback, informing users this is interactive
+ - Each donation/game project item card includes a 'Project Detail' button sop that users can redirect to a page that gives further description of the project
+ - Each donation item card gives a short summary, including project title, project image (if applicable), donation type, when the donation was made, and how much was donated
+ - Each game project item card (for creator profiles) includes a summary that includes project title, project image (if applicable), and the sum of donations made for the project.
+
+Normal Profile page:
+![normal profile](https://i.ibb.co/Rjps8ZD/normal-profile.png)
+
+Creator Profile page:
+![creator profile 1](https://i.ibb.co/Y0ssbcH/creator-profile-1.png)
+![creator profile 2](https://i.ibb.co/mtgtGrp/creator-profile-2.png)
