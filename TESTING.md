@@ -113,3 +113,51 @@ If the user has already made previous donations to game projects, these individu
 Similarly to user story 12 (except the user must be a Creator), any game projects created previously and that are still present on the platform can be found on the user's profile page. This list of records is formatted in the same way as previous donations, and also has a 'Load More' button and functionality. Another way for Creators to check what projects they have up on the platform is by using the search bar on the Game Projects page, searching for their username to ensure it will display results where the owner's name matches the search query.
 
 ## Manual Testing
+Below is a detailed account of all the manual testing that has been done to confirm all areas of the site work as expected.
+
+### Testing undertaken on desktop
+
+All steps on desktop were repeated in the following browsers: Firefox, Chrome, Safari and Internet Explorer.
+
+#### Elements present on all pages
+**Navbar**
+ - Tested that 'Login' and 'Register' links are only available when not logged in, and that only 'My Profile', 'Logout' and 'Game Projects' links are available when logged in
+ - Clicked on each link to confirm that they lead to the intended page
+
+**Footer**
+ - Clicked on all the social media links to confirm that they redirect to the correct social media websites
+ - Checked all pages to see that the footer stayed low enough on each page to not show whitespace under the footer
+
+#### Landing Page
+**Main Header**
+
+ - Clicked on the 'Learn More' button to confirm that it redirects to the information section lower down the page
+
+**Welcome paragraphs of text with images**
+
+ - Checked to make sure images rendered properly on the page and that the image quality didn't appear blurred
+
+**Information section**
+
+ - Hovered mouse over and off information boxes to ehck that the hover effects were working on each box
+ - Clicked on the links in the two boxes with link in the 'How It Works' section to confirm that they redirect the user to the intended pages
+ - Checked the icons appeared properly in the information boxes
+
+**Testimonial Carousel**
+
+ - Checked to see if the images rendered properly on each carousel item
+ - Clicked on the cursor buttons to confirm that they move left and right through the carousel items
+
+#### Login/Register/Logout pages
+Since these pages are built-in from django-allauth it is safe to assume that these are well tested already and that authentication and errors should work as expected. Still, just to be sure, the developer tested these pages, the forms and how they validate, the error messages that can pop up, plus testing that checking the 'Sign up as a creator' checkbox does make the user a Creator user. No issues/bugs were found when testing these.
+
+#### Profile page
+
+ - Created two new profiles, one that is signed up as a creator and one that isn't. Tested to see that the username is presented on the profile page of the user logged in
+ - Checked that a normal user only sees previous donations that the user has made (after having made some donations to a game project)
+ - Checked to see that a Creator user can see both the donations they have made and the game projects they have up on the platform currently (after making donations and creating game projects with this Creator user)
+ - Hovered the mouse over the 'Load More' button to confirm the hover effect works
+ - Clicked on the 'Load More' button to test that it renders more game project/donation items
+	 - **Bug**: While this functionality works when there are more records to render, if there are no more records, the button is still present. While this isn't an error, this can create a confusing user experience. This bug wasn't fixed in the time scope of this project but will be addressed in a future version of the website. This would require extra javascript and/or python code to hide the button should there be no more records to render
+ - Checked to see that the intended information is presented on each item card (for both donations and game projects)
+ - Clicked on the Project Detail button on several donation/game project items to confirm that the user is redirected to the project detail page of the game project in question (be it a project that was donated towards or a game project a Creator User
