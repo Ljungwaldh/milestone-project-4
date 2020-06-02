@@ -276,3 +276,102 @@ Delete Project:
 6. **Let Creator Users define their Pricing, Donation tiers and Rewards**: Allowing Creators to define what tiers and pricing of donations they want for their respective projects could help Creators to personalise their business models more, being able to potentially define their own rewards that come with the pricing they set. This can add some advanced complexity when working with the Stripe Payment system, especially with subscription models, when trying to set dynamic pricing that Creator users can define. This would involve considerable research and time for development to make this a reality - most likely for a real-world release of the platform
 
 ## Information Architecture
+### Database Choice
+
+-   As a framework Django works with SQL databases. During development locally machine the developer worked with the standard  **sqlite3**  database installed with Django.
+-   On deployment, the SQL database provided by Heroku is a  **PostgreSQL**  database.
+
+### Data Models
+
+#### User (django-allauth)
+The User model utilised for this project is the standard one provided by `django.contrib.auth.models`. Using this model helps to add, along with **django-allauth** functionality, a lot of built-in tools to help with creating the registration and login pages and user authentication.
+
+#### Profile app model
+Within the `profiles` app, the **Profile** model holds all the data needed for user profiles. The model utilises the User model to add allauth functionality
+
+**Profile Model**
+| Name | Key in db | Validation | Field Type |
+--- | --- | --- | ---
+User | user | on_delete=models.CASCADE | OneToOneField(User)
+Is Creator | is_creator | default=False, null=True, blank=True | BooleanField
+
+ - Profile is created via the sign-up form - this form having the custom field of `is_creator` in order for a new user to have a choice of which user type to sign up as. This is key to have in order to implement the idea of what the website is meant to be and how it will fundamentally function (eg. some users will want to just follow/contribute, others will want to post projects up for receiving donations)
+
+#### Gameproject app models
+Inside the `gameproject` app lies two models, a `GameProject` model and `Donation` model.
+
+**GameProject model**
+| Name | Key in db | Validation | Field Type |
+--- | --- | --- | ---
+Title | title | max_length=50 | CharField
+Description | description | None | TextField
+Owner | owner | null=True, blank=True, on_delete=models.SET_NULL | ForeignKey(Profile)
+Created at | created_at | blank=False, null=False, default=timezone.now | DateTimeField
+Image | image | upload_to='images/', null=True, blank=True | ImageField
+
+ - 'Created at' field utilises `timezone` from `django.utils` to set time and date on when the object is created
+ - Images are stored using Pillow to store all image files in an AWS S3 bucket
+
+**Donation model**
+| Name | Key in db | Validation | Field Type |
+--- | --- | --- | ---
+Title | title | max_length=50 | CharField
+Description | description | None | TextField
+Amount | amount | max_digits=6, decimal_places=2 | DecimalField
+Game Project | game_project | null=True, blank=True, on_delete=models.CASCADE | ForeignKey(GameProject)
+
+ - The data for this model, unlike the others, is required to be predefine in the admin panel as part of getting the website to function properly. The developer defines 3 objects/donation items (this being recommended should another developer want to run this project locally)
+
+#### Checkout app model
+Within the `checkout` app lies one model - the `Order` model.
+
+**Order model**
+| Name | Key in db | Validation | Field Type |
+--- | --- | --- | ---
+User | user | null=True, blank=True, on_delete=models.SET_NULL, related_name='donations' | ForeignKey(Profile)
+Donation Item | donation_item | null=True, blank=True, on_delete=models.CASCADE | ForeignKey(Donation)
+Stripe Payment Intent ID | stripe_pid | max_length=254, null=False, blank=False, default='' | CharField
+Game Project | game_project | null=True, blank=True, on_delete=models.CASCADE | ForeignKey(GameProject)
+Created at | created_at | blank=False, null=False, default=timezone.now | DateTimeField
+Status | status | max_length=2, choices=STATUS, default='PE' | CharField
+Order Number | order_number | max_length=32, null=False, editable=False | CharField
+
+ - Status choices are defined in the Order model - this being used to define if a payment is 'pending' or 'paid'
+ - Order number is generated from a function for the order Model, utilising the `uuid` import
+ - Stripe Payment Intent ID is provided by Stripe's elements and functionality to indicate when a client wish to send a certain payment through the payment system
+
+## Technologies Used
+### Tools
+- [Gitpod](https://www.gitpod.io/) is the IDE used for developing this project. 
+- [Django](https://www.djangoproject.com/) as python web framework for rapid development and clean design.
+- [Stripe](https://stripe.com) as payment platform to validate and accept credit card payments securely.
+- [AWS S3 Bucket](https://aws.amazon.com/) to store images entered into the database.
+- [Django Allauth](https://django-allauth.readthedocs.io/en/latest/index.html) to provide built-in user authentication functionality.
+- [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) to enable creation, configuration and management of AWS S3.
+- [Coverage](https://coverage.readthedocs.io/en/v4.5.x/) to measure code coverage of python unittests.
+- [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) to style django forms.
+- [Django Storages](https://django-storages.readthedocs.io/en/latest/) a collection of custom storage backends with django to work with boto3 and AWS S3.
+- [Gunicorn](https://pypi.org/project/gunicorn/) WSGI HTTP Server for UNIX to aid in deployment of the Django project to heroku.
+- [Pillow](https://pillow.readthedocs.io/en/stable/) as python imaging library to aid in processing image files to store in database.
+- [Psycopg2](https://pypi.org/project/psycopg2/) as PostgreSQL database adapter for Python.
+- [Whitenoise](http://whitenoise.evans.io/en/stable/) to allows the web app to serve its own static files.
+- [Imgbb](https://imgbb.com) to store external images for this project that were not entered into the database.
+- [PIP](https://pip.pypa.io/en/stable/installing/) for installation of tools needed in this project.
+- [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03) to handle version control.
+- [GitHub](https://github.com/) to store and share all project code remotely. 
+- Heroku for deployment
+- [Balsamiq](https://balsamiq.com/) to create the wireframes for this project.
+- [Coolors](https://coolors.co/) to help define the colour scheme for the website
+
+### Databases
+- [PostgreSQL](https://www.postgresql.org/) for production database, provided by heroku.
+- [SQlite3](https://www.sqlite.org/index.html) for development database, provided by django.
+
+### Libraries
+- [JQuery](https://jquery.com) to simplify DOM manipulation.
+- [Bootstrap](https://www.bootstrapcdn.com/) to simplify the structure of the website and make the website responsive easily.
+- [FontAwesome](https://www.bootstrapcdn.com/fontawesome/) to provide icons for Gamestarter donation platform
+- [Google Fonts](https://fonts.google.com/) to style the website fonts.
+
+### Languages
+- This project uses HTML, CSS, JavaScript and Python programming languages.
