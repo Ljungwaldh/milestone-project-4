@@ -362,6 +362,7 @@ Order Number | order_number | max_length=32, null=False, editable=False | CharFi
 - Heroku for deployment
 - [Balsamiq](https://balsamiq.com/) to create the wireframes for this project.
 - [Coolors](https://coolors.co/) to help define the colour scheme for the website
+- [LucidChart](https://www.lucidchart.com/pages/) to create data schemas as part of the planning phase of the project
 
 ### Databases
 - [PostgreSQL](https://www.postgresql.org/) for production database, provided by heroku.
@@ -375,3 +376,181 @@ Order Number | order_number | max_length=32, null=False, editable=False | CharFi
 
 ### Languages
 - This project uses HTML, CSS, JavaScript and Python programming languages.
+
+## Testing
+Testing is described in a separate [TESTING.md](TESTING.md) file.
+
+## Deployment
+
+### How to run this project locally
+
+To run this project on your own IDE follow the instructions below:
+
+Ensure you have the following tools: 
+    - An IDE such as [Visual Studio Code](https://code.visualstudio.com/)
+
+The following **must be installed** on your machine:
+    - [PIP](https://pip.pypa.io/en/stable/installing/)
+    - [Python 3](https://www.python.org/downloads/)
+    - [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03)
+
+To allow you to access all functionality on the site locally, ensure you have created free accounts with the following services:
+    - [Stripe](https://dashboard.stripe.com/register)
+    - [AWS](https://aws.amazon.com/) and [set up an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
+    - Google's [Gmail](https://www.google.com/gmail/)  for setting up email function (be sure to enable 2 step verification to be able to create an app password, relevant for when deploying the project)
+
+Please click the links above for documentation on how to set these up and retrieve the necessary environment variables.
+
+#### Instructions
+1. Save a copy of the github repository located at https://github.com/Ljungwaldh/milestone-project-4 by clicking the "download zip" button at the top of the page and extracting the zip file to your chosen folder. If you have Git installed on your system, you can clone the repository with the following command.
+    ```
+    git clone https://github.com/Ljungwaldh/milestone-project-4
+    ```
+
+2. Open your preferred IDE, open a terminal session in the unzip folder or cd to the correct location.
+
+3. A virtual environment is recommended for the Python interpreter, the developer recommends using Pythons built in virtual environment. Enter the command:
+    ```
+    python -m .venv venv
+    ```  
+_NOTE: The `python` part of this command and the ones in other steps below assumes  you are working with a windows operating system. Your Python command may differ, such as `python3` or `py`_
+
+4. Activate the .venv with the command:
+    ```
+    .venv\Scripts\activate 
+    ```
+_Again this **command may differ depending on your operating system**, please check the [Python Documentation on virtual environments](https://docs.python.org/3/library/venv.html) for further instructions._
+
+5. If needed, Upgrade pip locally with
+    ```
+    pip install --upgrade pip.
+    ```
+
+6. Install all required modules with the command 
+    ```
+    pip -r requirements.txt.
+    ```
+
+7. Set up the following environment variables within your IDE. 
+
+    - If using Gitpod, you'll be able to set up environment variables in the Settings tab under your account. Do not forget to restart your workspace to activate your environment variables or your code will not be able to see them: 
+
+        "DEVELOPMENT": True,
+        "SECRET_KEY": (enter key here)
+        "STRIPE_SECRET": (enter key here)
+        "STRIPE_PUBLIC_KEY": (enter key here)
+        "STRIPE_SECRET_KEY": (enter key here)
+        "AWS_ACCESS_KEY_ID": (enter key here)
+        "AWS_SECRET_ACCESS_KEY": (enter key here)
+        "AWS_STORAGE_BUCKET_NAME": (enter bucket name here)
+
+    - If using an IDE that includes a `bashrc` file, open this file and enter all the environment variables listed above using the following format: 
+    ```
+    HOSTNAME="<enter key here>"
+    ```
+    - `HOSTNAME` should be the local address for the site when running within your own IDE.
+    - `DEV` environment variable is set only within the development environment, it does not exist in the deployed version, making it possible to have different settings for the two environments. For example setting DEBUG to True only when working in development and not on the deployed site.
+
+8. If you have restarted your machine to activate your environment variables, do not forget to reactivate your virtual environment with the command used at step 4.
+
+9. Migrate the admin panel models to create your database template with the terminal command
+    ```
+    python manage.py migrate
+    ```
+
+10. Create your superuser to access the django admin panel and database with the following command, and then follow the steps to add your admin username and password:
+    ```
+    python manage.py createsuperuser
+    ```
+
+11. You can now run the program locally with the following command: 
+    ```
+    python manage.py runserver
+    ```
+
+12. Once the program is running, go to the local link provided and add `/admin` to the end of the url. Here log in with your superuser account and create Donation items/tiers (recommended 3) within the new database.
+
+13. Once instances of these items exist in your database your local site will run as expected.
+
+### Heroku Deployment
+
+To deploy the Gamestarter platform to heroku, take the following steps:
+
+1. Create a `requirements.txt` file using the terminal command `pip freeze > requirements.txt`.
+
+2. Create a `Procfile` with the terminal command `echo web: python app.py > Procfile`.
+
+3. `git add` and `git commit` the new requirements and Procfile and then `git push` the project to GitHub.
+
+3. Create a new app on the [Heroku website](https://dashboard.heroku.com/apps) by clicking the "New" button in your dashboard. Give it a name and set the region to whichever is applicable for your location.
+
+4. From the heroku dashboard of your newly created application, click on "Deploy" > "Deployment method" and select GitHub.
+
+5. Confirm the linking of the heroku app to the correct GitHub repository.
+
+6. In the heroku dashboard for the application, click on "Settings" > "Reveal Config Vars".
+
+7. Set the following config vars:
+
+| Key | Value |
+--- | ---
+AWS_ACCESS_KEY_ID | `<your AWS access key>`
+AWS_SECRET_ACCESS_KEY | `<your AWS secret key>`
+DATABASE_URL | `<your postgres database url>`
+DISABLE_COLLECTSTATIC | `1`
+EMAIL_HOST_PASS | `<your app password generated from your google account, from GMail Advanced Settings -> 'Security'>`
+EMAIL_HOST_USER | `<your GMail email address>`
+SECRET_KEY | `<your secret key>`
+STRIPE_PUBLIC_KEY | `<your Stripe public key>`
+STRIPE_SECRET_KEY | `<your Stripe secret key>`
+USE_AWS | `True`
+
+8. From the command line of your local IDE:
+    - Enter the heroku postres shell 
+    - Migrate the database models 
+    - Create your superuser account in your new database
+    
+     Instructions on how to do these steps can be found in the [heroku devcenter documentation](https://devcenter.heroku.com/articles/heroku-postgresql).
+
+9. In your heroku dashboard, click "Deploy". Scroll down to "Manual Deploy", select the master branch then click "Deploy Branch".
+
+10. Once the build is complete, click the "View app" button provided.
+
+11. From the link provided add `/admin` to the end of the url. Here log in with your superuser account and create Donation items/tiers (recommended 3) within the new database.
+
+12. Once instances of these items exist in your database your heroku site will run as expected.
+
+## Credits
+
+ - [Boutique Ado Mini Project](https://github.com/ckz8780/boutique_ado_v1) by [ckz8780](https://github.com/ckz8780) (Chris Zielinski), as part of
+   Code Institute learning material providing guidance on how to set up
+   a Django project, the fundamentals of working with the Django
+   framework, setting up Stripe, setting up email functionality, and
+   Django allauth. The mini project provided a great foundation to be
+   able to develop this project
+   
+ - [One Page Wonder theme](https://github.com/BlackrockDigital/startbootstrap-one-page-wonder/blob/master/index.html) from Start Boostrap used as inspiration to build part of the frontend of the landing page, this being the welcome section
+ - [Heroic Features template](https://github.com/BlackrockDigital/startbootstrap-heroic-features) from Start Boostrap providing inspiration for the heading of my landing page, where in the end the developer opted for a simple jumbotron with the logo and a call-to-action button
+ - [Patreon](https://www.patreon.com/home) and the profile/home page (when logged in) provided inspiration for how the Profile page would looked to be set up, focusing towards dashboards
+ - 'What Is Gamestarter' and 'How It works' sections in landing page inspired by using this [code snippet](https://bootsnipp.com/snippets/vN7kb) from Bootsnipp by [nahian91](https://bootsnipp.com/nahian91 "Bootstrap snippets by nahian91")
+ - This [article](https://medium.com/@gavinwiener/modifying-django-allauth-forms-6eb19e77ef56) from Medium providing guidance on how to customise Django Allauth forms, which was done on the registration form. Article written by [Gavin Wiener](https://medium.com/@gavinwiener)
+ - [Kickstarter](https://www.kickstarter.com/) providing inspiration on how a checkout for a donation platform can look like - this focusing on minimalism and users filling in only what is essential for payment (card details)
+ - This [code snippet](https://bootsnipp.com/snippets/xbaoX) from Bootsnipp providing inspiration for creating Testmonial carousel for the landing page. Code snippet made by [sangrai](https://bootsnipp.com/sangrai "Bootstrap snippets by sangrai")
+ - [Tutorial on LearnDjango](https://learndjango.com/tutorials/django-file-and-image-uploads-tutorial) assisting the developer to set up an image field for the GameProject model, as well as how users would be able to upload images
+ - Set up for displaying card items in both the 'profile' and 'all game projects' pages inspired by this [code snippet](https://bootsnipp.com/snippets/M515A). Code snippet made by [noemer](https://bootsnipp.com/noemer "Bootstrap snippets by noemer")
+ - 'Load More' button (HTML, CSS and JQuery) provided on the 'profile' page for both donations and game project dashboards inspired by this [code snippet](https://codepen.io/elmahdim/pen/sGkvH) from CodePen. Code snippet made by [Mahmoud Elmahdi](https://codepen.io/elmahdim)
+ - Donation options that appear on a 'project detail' page inspired by this [code snippet](https://bootsnipp.com/snippets/kleWM) from Bootsnipp. Code snippet was made by [vsantiago113](https://bootsnipp.com/vsantiago113 "Bootstrap snippets by vsantiago113")
+ - Set up previous donations made on 'profile' page to be displayed from most recently made going downwards for older donations. Being able to manipulate data from views.py to be displayed in a certain order was possible through this [Stack Overflow forum](https://stackoverflow.com/questions/9834038/django-order-by-query-set-ascending-and-descending). Credit for the answer goes to [Keith](https://stackoverflow.com/users/1215645/keith) on Stack Overflow
+ - A number of images from Pexels.com provided some static images used for the landing page, these including:
+	 - [Teenager playing video games](https://www.pexels.com/photo/joyful-teenager-playing-video-game-on-tv-console-3853909/) by Andrea Piacquadio
+	 - [Black and white video game controller](https://www.pexels.com/photo/white-and-black-game-controller-989939/) by FOX 
+	 - [Man working on Apple computer](https://www.pexels.com/photo/adult-apple-device-business-code-340152/) by hitesh choudhary
+	 - [Man smiling by wall](https://www.pexels.com/photo/adult-beard-boy-casual-220453/) by Pixabay
+	 - [Woman in the city, winter](https://www.pexels.com/photo/adult-beautiful-blonde-blur-324658/) by freestocks.org
+	 - [Smiling man by the beach](https://www.pexels.com/photo/man-wearing-black-zip-up-jacket-near-beach-smiling-at-the-photo-736716/) by Tim Savage
+
+## Acknowledgements
+
+ - I would like to thank my tutors at Code Institute, especially Xavier Astor, Kevin Loughrey and Chris Zielinski for guiding and teaching me how to create a Django application
+ - I would like to thank my mentor Anthony Ngene for his ongoing support, guidance, and the challenges he sets me to produce the best possible projects that I can produce
+ - I would like to give a huge thanks to friends and family who have provided moral support throughout the whole process
