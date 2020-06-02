@@ -199,3 +199,80 @@ Normal Profile page:
 Creator Profile page:
 ![creator profile 1](https://i.ibb.co/Y0ssbcH/creator-profile-1.png)
 ![creator profile 2](https://i.ibb.co/mtgtGrp/creator-profile-2.png)
+
+#### Game Projects
+**All Projects page**
+The 'Game Projects' option in the navbar will bring users to a repository of all game projects listed on the platform at a given time. 
+
+ - Projects will be presented in three's on larger screens, while on
+   smaller screens they will stack on top of each other 
+ - Two buttons will be present at the top of the page to to switch
+   presentation of projects in a grid view or in a list view
+ - A search bar is made available for users to be able to search   
+   through game projects, where key words will filter through the   
+   title, owner and descriptions of the game projects
+ - Each project card will include details such as title, owner, and the
+   total amount of donations the project has managed to collect
+
+![all projects grid view](https://i.ibb.co/jTcBhC6/all-projects-1.png)
+![all projects list view](https://i.ibb.co/R4773V8/all-projects-2.png)
+
+**Project Detail page**
+
+ - Normal user view will display details of a project when a user clicks on the 'Project Detail' button on a given project card. These details include the title, image (if applicable), owner, sum of donations collected so far, project description
+ - Users who are not the owners of the project will be presented with 3 donation options: Basic, Pro, and Premium, with their respective amounts (Note: this labelling/tiers of donation types may hold little relevance for the first release of the website, but will act as a tier for a blog feature in the future)
+
+![non-owner project details](https://i.ibb.co/Kxb1Rsp/project-detail-1.png)
+
+ - If the user is the owner of the page, no donation options will be made available but rather two buttons will be made available: to Update or to Delete the project
+
+![project owner project details](https://i.ibb.co/GJfH8wb/project-detail-2.png)
+
+**Add/Edit/Delete Project (For Project Creator)**
+
+ - These functions are available for users who are the owner of a given project. While all users can read details on any project, Creator users are able to add, edit, and delete their projects
+ - For add and edit pages, the user is presented with a form for filling in the title, description, and being able to attach a cover image if the Creator user wishes to. Title and description are required fields while the image attachment is optional, and if no image is attached, a default image will be attached to the project that indicates visually that no image has been attached
+ - For the delete functionality, this will provide a Creator user to delete the project from the platform repository. The user gets a notification at the top of the page alerting this, as well as being redirected to the 'All Projects' page
+
+Add Project:
+
+![add project page](https://i.ibb.co/3hkm59s/add-project.png)
+
+Edit Project:
+
+![edit project page](https://i.ibb.co/HnXnmNW/edit-project.png)
+
+Delete Project: 
+
+![delete project function](https://i.ibb.co/rvP5gW9/delete-project.png)
+
+#### Checkout
+**Checkout page**
+
+ - Once a user selects a donation type from a 'Project Detail' page, they are redirected to a checkout page
+ - The page presents a summary of what the user is donating towards and how much, followed by a field for filling out card details (this element constructed from implementing the [Stripe payment system](https://stripe.com/docs/payments/checkout/accept-a-payment))
+ - User is given feedback is card details entered are invalid in any way (be it invalid card number, CVC, and/or expiration date)
+ - Once the user submits/confirms the donation with valid card details, a loading overlay is presented over the page to indicate that the payment is being processed
+
+![checkout page](https://i.ibb.co/NFHFnQr/checkout-1.png)
+
+![checkout overlay payment processing](https://i.ibb.co/M8c52n1/checkout-2.png)
+
+**Checkout Success page**
+
+ - If the transaction is successful, the user is redirected to a 'checkout success'
+ - The page includes details of the project donated towards, a thank you message, and an order number to indicate that the donation has been recorded
+ - Below donation details includes information informing users of a future feature, this being email confirmation of donations, which at the time of writing, isn't implemented yet. The text helps to indicate that should users wish to obtain a confirmation via email, they can get in touch with the website's owner via the provided email address
+
+![checkout success page](https://i.ibb.co/DD4c9QN/checkout-success.png)
+
+### Features Left to Implement
+
+ 1. **Blog app**: Blog functionality where game projects can have their dedicated blogs to update donors/fans of the progress on the project/development. This feature would also include commenting functionality for donors, and creators of the game projects could define what content is available to which type of users (based on amount a user has donated, what donation type a donor has paid for etc.)
+ 2. **Sign-in/Create account via Social Media**: Giving users/new visitors the option to sign up and/or login with their social media accounts (eg. Facebook, Google)
+ 3. **Stripe Webhooks on Payments**: For the developer to add increased security that would give the website more real-world application, webhooks would be necessary in order to confirm, in the back-end, the status of the user's payment. Also, this would help to alleviate the issue/rare event of a user exiting the page before the transaction was complete, so that the order can be created if it was successful
+ 4. **Subscription Payment Model**: If the developer decides to keep the donation tiers as ever-present in the future, turning the payments model to a subscription basis would make more sense from a user experience perspective. This would help Creator users define who has access to which types of content in a blog depending on the subscription type. Since implementing subscriptions via Stripe cannot be done with signing up an actual business account on Stripe, this would be a feature to implement should the developer decide to deploy the website on a web domain and deliver it as a real world application/platform
+ 5. **Email confirmation of Donations/Orders**: Having the added feature of confirmation emails, when a user makes a donation, would improve user experience by giving them transaction documentation in a place where users would usually like to have it - in their email inbox
+6. **Let Creator Users define their Pricing, Donation tiers and Rewards**: Allowing Creators to define what tiers and pricing of donations they want for their respective projects could help Creators to personalise their business models more, being able to potentially define their own rewards that come with the pricing they set. This can add some advanced complexity when working with the Stripe Payment system, especially with subscription models, when trying to set dynamic pricing that Creator users can define. This would involve considerable research and time for development to make this a reality - most likely for a real-world release of the platform
+
+## Information Architecture
