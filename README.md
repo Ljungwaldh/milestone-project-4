@@ -531,6 +531,7 @@ USE_AWS | `True`
    able to develop this project
    
  - [One Page Wonder theme](https://github.com/BlackrockDigital/startbootstrap-one-page-wonder/blob/master/index.html) from Start Boostrap used as inspiration to build part of the frontend of the landing page, this being the welcome section
+ - In terms of a README to follow a good example of and get inspiration from, the developer used this [Github Repository,](https://github.com/AJGreaves/thehouseofmouse) the README and TESTING files as a guide for writing the README and TESTING files for this project. Credits for the repository go to [AJGreaves on Github](https://github.com/AJGreaves)
  - [Heroic Features template](https://github.com/BlackrockDigital/startbootstrap-heroic-features) from Start Boostrap providing inspiration for the heading of my landing page, where in the end the developer opted for a simple jumbotron with the logo and a call-to-action button
  - [Patreon](https://www.patreon.com/home) and the profile/home page (when logged in) provided inspiration for how the Profile page would looked to be set up, focusing towards dashboards
  - 'What Is Gamestarter' and 'How It works' sections in landing page inspired by using this [code snippet](https://bootsnipp.com/snippets/vN7kb) from Bootsnipp by [nahian91](https://bootsnipp.com/nahian91 "Bootstrap snippets by nahian91")
