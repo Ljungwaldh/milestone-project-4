@@ -8,7 +8,9 @@ class ProjectForm(forms.ModelForm):
         model = GameProject
         fields = ('title', 'description', 'image')
 
-    image = forms.ImageField(label='Upload a Cover Image/Photo (Optional, recommended 400x250 or similar ratio)', required=False)
+    image = forms.ImageField(
+        label=('Upload a Cover Image/Photo (Optional, recommended 400x250 or similar ratio)'),
+        required=False)
 
     def __init__(self, *args, **kwargs):
         """

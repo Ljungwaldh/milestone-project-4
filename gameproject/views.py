@@ -77,7 +77,10 @@ def add_project(request):
             messages.success(request, 'Successfully created project!')
             return redirect(reverse('project_detail', args=[project.id]))
         else:
-            messages.error(request, 'Failed to create project. Please ensure the form is valid')
+            messages.error(
+                request,
+                'Failed to create project. Please ensure the form is valid'
+                )
 
     project_form = ProjectForm()
 
@@ -103,7 +106,11 @@ def edit_project(request, game_project_id):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        game_project_form = ProjectForm(request.POST, request.FILES, instance=game_project)
+        game_project_form = ProjectForm(
+            request.POST,
+            request.FILES,
+            instance=game_project
+            )
         if game_project_form.is_valid():
             game_project_form.save(commit=False)
             game_project.owner = profile
@@ -114,7 +121,10 @@ def edit_project(request, game_project_id):
             messages.success(request, 'Successfully updated project!')
             return redirect(reverse('project_detail', args=[game_project.id]))
         else:
-            messages.error(request, 'Failed to update project. Please ensure the form is valid.')
+            messages.error(
+                request,
+                'Failed to update project. Please ensure the form is valid.'
+                )
     else:
         game_project_form = ProjectForm(instance=game_project)
         messages.info(request, f'You are editing {game_project.title}')

@@ -25,13 +25,21 @@ class TestViews(TestCase):
 
         profile = Profile.objects.create(user=user)
 
-        project = GameProject.objects.create(title='test', description='testing', owner=profile)
+        """Instance of project created so that
+        there can be a project to access in the test"""
+        project = GameProject.objects.create(
+            title='test',
+            description='testing',
+            owner=profile
+            )
 
-        # profile = Profile.objects.create(user=user)
         self.client.login(username='temporary', password='secret')
-        response = self.client.get('/gameproject/project_detail/f"{project.id}"/', follow=True)
+        response = self.client.get(
+            '/gameproject/project_detail/f"{project.id}"/',
+            follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(template_name='gameproject/project_detail.html')
+        self.assertTemplateUsed(
+            template_name='gameproject/project_detail.html')
 
     def test_get_addproject_page_and_non_creator_is_redirected_away(self):
 
@@ -39,6 +47,8 @@ class TestViews(TestCase):
                                    email='temp@temp.com',
                                    password='secret')
 
+        """Instance of profile created so that
+        a profile that isn't a creator is defined"""
         profile = Profile.objects.create(user=user, is_creator=False)
 
         self.client.login(username='temporary', password='secret')

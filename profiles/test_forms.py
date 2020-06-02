@@ -1,6 +1,5 @@
 from django.test import TestCase
 from .forms import CustomSignupForm
-from django.contrib.auth.models import User
 
 
 class TestCustomSignupFrom(TestCase):
@@ -27,10 +26,13 @@ class TestCustomSignupFrom(TestCase):
         form = CustomSignupForm({'password1': ''})
         self.assertFalse(form.is_valid())
         self.assertIn('password1', form.errors.keys())
-        self.assertEqual(form.errors['password1'][0], 'This field is required.')
+        self.assertEqual(
+            form.errors['password1'][0], 'This field is required.')
 
     def test_iscreator_is_not_required(self):
         form = CustomSignupForm({'email': 'brian@brian.com', 'email2':
-                                 'brian@brian.com', 'username': 'thebrian', 'password1': 
-                                 'hellothistest', 'password2': 'hellothistest'})
+                                 'brian@brian.com',
+                                 'username': 'thebrian',
+                                 'password1': 'hellothistest',
+                                 'password2': 'hellothistest'})
         self.assertTrue(form.is_valid())

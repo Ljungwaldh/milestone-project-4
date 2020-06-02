@@ -1,6 +1,5 @@
 from django.test import TestCase
 from .forms import ProjectForm
-from .models import GameProject
 from profiles.models import Profile
 from django.contrib.auth.models import User
 
@@ -17,7 +16,10 @@ class TestProjectForm(TestCase):
         form = ProjectForm({'description': ''})
         self.assertFalse(form.is_valid())
         self.assertIn('description', form.errors.keys())
-        self.assertEqual(form.errors['description'][0], 'This field is required.')
+        self.assertEqual(
+            form.errors['description'][0],
+            'This field is required.'
+            )
 
     def test_valid_form_leads_to_correct_redirect(self):
         user = User.objects.create(username='testuser')

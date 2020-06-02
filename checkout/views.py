@@ -31,7 +31,10 @@ def donate(request):
         profile = get_object_or_404(Profile, user=request.user)
 
         if profile == project.owner:
-            messages.error(request, 'Sorry, you cannot donate to your own project')
+            messages.error(
+                request,
+                'Sorry, you cannot donate to your own project'
+                )
             return redirect(reverse('all_projects'))
 
         # Create Stripe Payment Intent
