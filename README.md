@@ -282,6 +282,7 @@ Delete Project:
 -   On deployment, the SQL database provided by Heroku is a  **PostgreSQL**  database.
 
 ### Data Models
+The Class Meta for each model was defined with `pass`. Since there hasn't been a need to use Meta class for the models, this is defined in this manner to satisfy PEP8 requirements.
 
 #### User (django-allauth)
 The User model utilised for this project is the standard one provided by `django.contrib.auth.models`. Using this model helps to add, along with **django-allauth** functionality, a lot of built-in tools to help with creating the registration and login pages and user authentication.

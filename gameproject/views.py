@@ -21,12 +21,14 @@ def all_projects(request):
             messages.error(request, "You didn't enter any search criteria!")
             return redirect(reverse('all_projects'))
 
-        queries = Q(title__icontains=query) | Q(description__icontains=query) | Q(owner__user__username__icontains=query)
+        queries = Q(title__icontains=query) | Q(description__icontains=query) \
+            | Q(owner__user__username__icontains=query)
         game_projects = game_projects.filter(queries)
 
     for game_project in game_projects:
         game_project.total_amount = 0
-        for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+        for order in Order.objects.filter(
+                game_project=game_project).filter(status='PA'):
             game_project.total_amount += order.donation_item.amount
 
     template = 'gameproject/all_projects.html'
@@ -47,7 +49,8 @@ def project_detail(request, project_id):
     profile = get_object_or_404(Profile, user=request.user)
 
     game_project.total_amount = 0
-    for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+    for order in Order.objects.filter(
+            game_project=game_project).filter(status='PA'):
         game_project.total_amount += order.donation_item.amount
 
     template = 'gameproject/project_detail.html'
@@ -115,7 +118,8 @@ def edit_project(request, game_project_id):
             game_project_form.save(commit=False)
             game_project.owner = profile
             game_project.total_amount = 0
-            for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+            for order in Order.objects.filter(
+                    game_project=game_project).filter(status='PA'):
                 game_project.total_amount += order.donation_item.amount
             game_project.save()
             messages.success(request, 'Successfully updated project!')

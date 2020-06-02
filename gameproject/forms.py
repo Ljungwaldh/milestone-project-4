@@ -8,9 +8,9 @@ class ProjectForm(forms.ModelForm):
         model = GameProject
         fields = ('title', 'description', 'image')
 
-    image = forms.ImageField(
-        label=('Upload a Cover Image/Photo (Optional, recommended 400x250 or similar ratio)'),
-        required=False)
+    image = forms.ImageField(label=('Upload a Cover Image/Photo (Optional'
+                                    ', recommended 400x250 or similar ratio)'),
+                             required=False)
 
     def __init__(self, *args, **kwargs):
         """
@@ -20,8 +20,10 @@ class ProjectForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             'title': 'Give your project a gripping title',
-            'description': 'Describe what it is all about - get readers/donars excited!',
-            'image': 'Upload a Cover Image/Photo (Optional, recommended 400x250 or similar ratio)',
+            ('description'): ('Describe what it is all about'
+                              ' - get readers/donars excited!'),
+            ('image'): ('Upload a Cover Image/Photo'
+                        '(Optional, recommended 400x250 or similar ratio)'),
         }
 
         self.fields['title'].widget.attrs['autofocus'] = True

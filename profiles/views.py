@@ -13,11 +13,13 @@ def profile(request):
 
     orders = Order.objects.filter(user=profile).order_by('-created_at')
 
-    game_projects = GameProject.objects.filter(owner=profile).order_by('-created_at')
+    game_projects = GameProject.objects.filter(
+                                 owner=profile).order_by('-created_at')
 
     for game_project in game_projects:
         game_project.total_amount = 0
-        for order in Order.objects.filter(game_project=game_project).filter(status='PA'):
+        for order in Order.objects.filter(
+                game_project=game_project).filter(status='PA'):
             game_project.total_amount += order.donation_item.amount
 
     template = 'profiles/profile.html'

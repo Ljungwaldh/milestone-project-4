@@ -20,8 +20,8 @@ class GameProject(models.Model):
         null=False,
         default=timezone.now
         )
-    """The Developer has chosen to maek it optional
-    to upload images, hence null and black are both set to True"""
+    """The Developer has chosen to make it optional
+    to upload images, hence null and blank are both set to True"""
     image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
