@@ -1,6 +1,8 @@
 
 # Gamestarter
 [Gamestarter](https://ljungwaldh-gamestarter.herokuapp.com/) is a website dedicated to helping aspiring game developers to kick-start their ideas through crowdfunding - be it an interesting new mod for an existing game, or in creating their own full-length video game. The website is designed to be a simple donation platform, where users signing up normally can contribute to video game project that they feel are interesting and worth investing in. On the other hand, signing in as a creator allows budding game developers to get their ideas out on to the platform so that they can start to receive donations from potential fans. In the first release of the website, the experience is designed to be simple, easy to navigate, and to be a seamless donation experience with minimal form filling required. This is mainly aimed towards developers of video games and towards video game enthusiasts.
+### Note for the Assessors at Code Institute
+Should you need superuser/admin user credentials for testing the website, please find this in the separate [TESTING.md](TESTING.md) file. Please use with utmost discretion.
 
 ## UX
 ### Goals

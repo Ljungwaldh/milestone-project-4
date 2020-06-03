@@ -1,4 +1,9 @@
 # Gamestarter - Testing Details
+Admin profile details for the deployed version are:
+Username: gitpod
+Password: peapodsareblack
+Please use with utmost discretion
+
 ## Automated Testing
 
 ### Validation Services
