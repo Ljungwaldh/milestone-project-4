@@ -5,13 +5,16 @@ from allauth.account.forms import SignupForm
 
 
 class UserForm(forms.ModelForm):
-
+    """Form provided by django-allaiuth for user registration"""
     class Meta:
         model = User
         fields = ['username', 'email']
 
 
 class CustomSignupForm(SignupForm):
+    """Custom sign-up form that adds to the UserForm
+    an additonal checkbox field so users can choose to
+    sign-up as Creator users"""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

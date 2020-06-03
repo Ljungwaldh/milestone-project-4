@@ -3,6 +3,7 @@ from .forms import CustomSignupForm
 
 
 class TestCustomSignupFrom(TestCase):
+    """Testing done to confirm which fields are required/not required"""
 
     def test_username_is_required(self):
         form = CustomSignupForm({'username': ''})

@@ -6,6 +6,8 @@ from gameproject.models import GameProject, Donation
 
 
 class TestModel(TestCase):
+    """Simple test to confirm that the Order model
+    returns the strpie_pid from a string method"""
     def test_order_model_string_method_returns_stripe_pid(self):
         user = User.objects.create(
             email='brian@brian.com',

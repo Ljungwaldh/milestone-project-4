@@ -3,7 +3,9 @@ from .models import GameProject
 
 
 class ProjectForm(forms.ModelForm):
-
+    """Form used on Add/Edit project functions so that
+    Creator type users can upload/update their projects
+    on the platform"""
     class Meta:
         model = GameProject
         fields = ('title', 'description', 'image')

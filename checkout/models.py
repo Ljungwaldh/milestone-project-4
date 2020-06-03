@@ -6,7 +6,10 @@ from gameproject.models import GameProject, Donation
 
 
 class Order(models.Model):
-
+    """The Order Model stores data on successful donations.
+    The model also includes a function to generate order
+    numbers so that a user get's a unique reference to a donation
+    they have made."""
     class Meta:
         pass
 

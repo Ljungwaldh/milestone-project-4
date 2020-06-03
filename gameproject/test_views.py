@@ -5,7 +5,10 @@ from gameproject.models import GameProject
 
 
 class TestViews(TestCase):
-
+    """Two tests that test successful rendering of tow templates
+    and the third test testing that users that aren't creators
+    are redirected away/restricted from the add_project function
+    and template"""
     def test_get_all_project_page(self):
 
         User.objects.create(username='temporary',

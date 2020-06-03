@@ -10,6 +10,10 @@ from .models import Order
 
 @login_required
 def donate(request):
+    """This function handles rendering of the checkout
+    page and for actions subsequent to Stripe's payment
+    verification (done in javascript) that lead to
+    donate_success should the payment be successful"""
 
     if request.method == 'POST':
 
@@ -77,7 +81,7 @@ def donate(request):
 @login_required
 def donate_success(request, order_number):
     """
-    Handle successful checkouts
+    Handle successful checkouts/donations
     """
     order = get_object_or_404(Order, order_number=order_number)
     profile = get_object_or_404(Profile, user=request.user)

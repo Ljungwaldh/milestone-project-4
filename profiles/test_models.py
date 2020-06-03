@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 
 class TestModel(TestCase):
+    """Tests for confirming that is_creator field defaults
+    to False and that the string merhod returns the correct value"""
     def test_iscreator_defaults_to_false(self):
         user = User.objects.create(
             email='brian@brian.com',

@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 
 
 class TestProjectForm(TestCase):
-
+    """Test include testing of required fields and testing
+    that the user is correctly redirected after submitting a valid form"""
     def test_title_field_is_required(self):
         form = ProjectForm({'title': ''})
         self.assertFalse(form.is_valid())

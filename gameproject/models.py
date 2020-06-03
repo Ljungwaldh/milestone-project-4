@@ -4,7 +4,8 @@ from profiles.models import Profile
 
 
 class GameProject(models.Model):
-
+    """GameProject model stores data regarding game projects
+    that Creater type users upload/update on the platform"""
     class Meta:
         pass
 
@@ -29,7 +30,9 @@ class GameProject(models.Model):
 
 
 class Donation(models.Model):
-
+    """Donation model stores donation options that are
+    presented to users who wish to donate to projects
+    that aren't their own"""
     class Meta:
         pass
 

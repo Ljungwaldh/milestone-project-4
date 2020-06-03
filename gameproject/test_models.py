@@ -3,7 +3,8 @@ from .models import Donation, GameProject
 
 
 class TestModel(TestCase):
-
+    """Simple tests testing that what is returned from
+    a string method is correct"""
     def test_string_is_equal_to_title_for_gameproject(self):
         game_project = GameProject.objects.create(
               title='test', description='testing')

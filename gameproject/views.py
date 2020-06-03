@@ -10,6 +10,7 @@ from django.db.models import Q
 
 @login_required
 def all_projects(request):
+    """Renders all game projects in the platform"""
 
     game_projects = GameProject.objects.all()
     profile = get_object_or_404(Profile, user=request.user)
@@ -43,6 +44,7 @@ def all_projects(request):
 
 @login_required
 def project_detail(request, project_id):
+    """Renders a single page for one game project"""
 
     game_project = get_object_or_404(GameProject, pk=project_id)
     donation_options = Donation.objects.all()
@@ -64,6 +66,8 @@ def project_detail(request, project_id):
 
 @login_required
 def add_project(request):
+    """Renders template with empty ProjectForm, and if submitted
+    correctly, creates an object in the GameProject Model"""
 
     profile = get_object_or_404(Profile, user=request.user)
 
@@ -97,6 +101,8 @@ def add_project(request):
 
 @login_required
 def edit_project(request, game_project_id):
+    """Renders template with a pre-filled ProjectForm, and if submitted
+    correctly, updates an object in the GameProject Model"""
 
     profile = get_object_or_404(Profile, user=request.user)
     game_project = get_object_or_404(GameProject, pk=game_project_id)
@@ -144,6 +150,8 @@ def edit_project(request, game_project_id):
 
 @login_required
 def delete_project(request, project_id):
+    """Provides function to delete the game project in question
+    from the GameProject Model"""
 
     profile = get_object_or_404(Profile, user=request.user)
     project = get_object_or_404(GameProject, pk=project_id)

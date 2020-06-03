@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 
 class TestViews(TestCase):
+    """One test for the profile page rendering successfully with
+    a status code of 200"""
 
     def test_get_profile_page(self):
 
