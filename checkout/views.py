@@ -80,6 +80,14 @@ def donate_success(request, order_number):
     Handle successful checkouts
     """
     order = get_object_or_404(Order, order_number=order_number)
+    profile = get_object_or_404(Profile, user=request.user)
+
+    if order.user != profile:
+        messages.error(
+                request,
+                'Sorry, you cannot access this order confirmation.'
+                )
+        return redirect(reverse('home'))
 
     template = 'checkout/checkout_success.html'
     context = {
