@@ -128,6 +128,13 @@ All steps on desktop were repeated in the following browsers: Firefox, Chrome, S
  - Clicked on all the social media links to confirm that they redirect to the correct social media websites
  - Checked all pages to see that the footer stayed low enough on each page to not show whitespace under the footer
 
+**Messages**
+All instances of where messages are applied to logic were tested to test that they all render as they should depending on the event/view.
+
+ - **Resolved Bug**: In only certain instances were messages popping up, for example, for when a Creator user is editing a project. However, many other messages were not rendering. In the end, this was done to missing an extra line of code in settings.py related to message storage:
+	 - `MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'` 
+- After adding this line of code all the messages started to work as intended
+
 #### Landing Page
 **Main Header**
 
@@ -158,6 +165,69 @@ Since these pages are built-in from django-allauth it is safe to assume that the
  - Checked to see that a Creator user can see both the donations they have made and the game projects they have up on the platform currently (after making donations and creating game projects with this Creator user)
  - Hovered the mouse over the 'Load More' button to confirm the hover effect works
  - Clicked on the 'Load More' button to test that it renders more game project/donation items
-	 - **Bug**: While this functionality works when there are more records to render, if there are no more records, the button is still present. While this isn't an error, this can create a confusing user experience. This bug wasn't fixed in the time scope of this project but will be addressed in a future version of the website. This would require extra javascript and/or python code to hide the button should there be no more records to render
+	 - **Unresolved Bug**: While this functionality works when there are more records to render, if there are no more records, the button is still present. While this isn't an error, this can create a confusing user experience. This bug wasn't fixed in the time scope of this project but will be addressed in a future version of the website. This would require extra javascript and/or python code to hide the button should there be no more records to render
  - Checked to see that the intended information is presented on each item card (for both donations and game projects)
  - Clicked on the Project Detail button on several donation/game project items to confirm that the user is redirected to the project detail page of the game project in question (be it a project that was donated towards or a game project a Creator User
+
+#### Game Projects page
+
+ - Clicked on the buttons for 'Grid' and 'List' views to confirm that the view format changes
+ - Used the search bar with search queries that should render the game projects containing the query to test that this fetches the right result(s)
+ - Typed in a search query that shouldn't have any matches to check that the message renders for no game projects being present
+ - Searched with an empty query to check that message appears alerting the user that he/she searched with an empty query
+ - As a Creator user, checked the the Add Project button redirects to the right page. Also checked to ensure that normal users cannot access that link in any way and are instead redirected elsewhere
+ - Clicked on the Project Detail button for a number of projects to check that the user is redirected to the correct Project Detail page for the project in question
+
+#### Project Detail page
+
+ - Checked to see that the intended information about a project is presented, alongside an image if attached, otherwise presenting a placeholder image
+ - Checked to ensure that users who aren't the owner of the project are displayed with the donations options below the project details
+ - Tried to access the checkout page for a project donation when the selected project's owner matches the profile logged in. Tested this to ensure that this profile cannot donate to their own project and are instead redirected to the Game Projects page
+ - Checked, as a Creator user logged in, that when that user accesses the project details of a project that user has created, that the correct buttons render for Update and Delete. These buttons were also tested to ensure that they redirect/function as intended
+
+#### Add/Edit/Delete Project (for Creator users)
+
+ - Checked to ensure that Add project and Edit Project pages rendered properly. where the Add Project page renders an empty form with placeholders, and the Edit Project page has the field pre-filled with previously saved information
+ - Tried submitting the form on Add/Edit Project pages with one of or both Title and Description fields blank, prompting the form messages that these fields are required
+ - Submitted a form without attaching an image to test that this isn't required, and that a placeholder image is instead inserted upon creating/updating the project
+ - Clicked on the Delete button to confirm that this will delete the project from the database and Game Project page
+ - Tested accessing the links with users that were either not the owner of the project or were just a normal user. The intended redirects and error messages appeared informing the user that they cannot perform these actions
+ - Tested the Cancel button to confirm that it redirects back to the Project Detail page
+
+#### Checkout
+**Checkout page**
+
+ - Confirmed that they correct information about a project and what is being donated is rendered on the page
+ - Checked to see that the Stripe card form element rendered correctly on the page, with the correct placeholders to inform users what input is required
+ - Tested the payment form with a card that would generate a successful transaction and a card that would generate a unsuccessful transaction. These both worked as intended, where the successful transaction redirects to the Checkout Success page, while an unsuccessful transaction reloads the page and gives user feedback that the card didn't work
+ - Submitted the payment form to confirm that the payment processing overlay was working correctly
+ - Just after submitting the form, clicked back to redirect elsewhere from the checkout page to test that the order isn't confirmed as paid in the database
+	 - **Unresolved Bug**: While in the database the order's status remains 'Pending' since the POST method wasn't completed in the views.py file (due to Stripe processing the payment), in the Stripe dashboard it indicates that the payment was successful. While this scenario is unlikely to happen, such a case could cause a transaction to be made without the order being confirmed. While in the scope of this project this issue will not be addressed, a way to fix this issue would be to implement webhooks to listen for Stripe events. Subsequently, based on these Stripe events being sent to the server, the server could generate the order to ensure that if the payment was successful that the order is generated in this manner instead
+
+**Checkout Success page**
+
+ - Checked to see that the correct information is rendered on the page, including the Order number, to indicate that the database generates an order number
+ - Tested to see if other users would be able to access the same order confirmation page of another user
+	 - **Resolved Bug**: The checkout success page for a given order was technically accessible to any other user who would be able to get the link to it. While this altered nothing in the database, this can be a breach of a user's privacy from other users, and therefore some defensive programme needed implementing to block other users from seeing someone else's donation confirmation:
+			
+			if order.user != profile:
+
+				messages.error(
+
+				request,
+
+				'Sorry, you cannot access this order confirmation.'
+
+				)
+
+				return redirect(reverse('home'))
+
+ - Checked the database to see that payments that had gone through successfuly via Strip had the status of 'Paid, and all other order objects had the status of 'Pending' (be it that the payment form hasn't been submitted yet, if the transaction was unsuccessful etc.)
+
+### Testing undertaken on mobile/tablet devices
+The same tests done for desktop were conducted on smaller devices (mobile/tablet), as well as testing for responsiveness of elements. Due to the simple and clean design of the website, responsiveness appeared to be good on all devices and found no significant bugs that were specific to smaller devices.
+
+### Further testing
+
+ - Asked my classmates to help test the website and it's core functionality. No issues were experienced when they tested the deployed version of the website
+ - Same process was done with friends and family that were able to test it - no major issues on functionality brought up. Feedback related more to design aspects, where the hope was that future releases would be able to give the website more 'life' - perhaps through additional design elements and via a blog feature. It was also noted that it would be nice to be able to change you user type while logged in, as opposed to having to sign up again with another account should you have originally signed up as a normal user (not a Creator user)
