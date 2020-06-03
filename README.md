@@ -500,15 +500,14 @@ To deploy the Gamestarter platform to heroku, take the following steps:
 --- | ---
 AWS_ACCESS_KEY_ID | `<your AWS access key>`
 AWS_SECRET_ACCESS_KEY | `<your AWS secret key>`
+AWS_STORAGE_BUCKET_NAME | `<your AWS bucket name>`
 DATABASE_URL | `<your postgres database url>`
-DISABLE_COLLECTSTATIC | `1`
 EMAIL_HOST_PASS | `<your app password generated from your google account, from GMail Advanced Settings -> 'Security'>`
 EMAIL_HOST_USER | `<your GMail email address>`
 SECRET_KEY | `<your secret key>`
 STRIPE_PUBLIC_KEY | `<your Stripe public key>`
 STRIPE_SECRET_KEY | `<your Stripe secret key>`
 USE_AWS | `True`
-DEBUG | `False`
 
 8. From the command line of your local IDE:
     - Enter the heroku postres shell 

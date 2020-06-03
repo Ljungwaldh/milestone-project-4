@@ -124,6 +124,15 @@ Below is a detailed account of all the manual testing that has been done to conf
 
 All steps on desktop were repeated in the following browsers: Firefox, Chrome, Safari and Internet Explorer.
 
+#### Opening the app on Heroku
+
+ - **Resolved Bug**: Debug was set to 'False' in order to prepare the project for submission. However, a 500 error code page was rendered.
+ - Root of the problem was eventually to be found as how Whitenoise was set up in settings.py. The following steps were taken to address the issue:
+	 - DEBUG was set to use `if 'DEVELOPMENT' in os.environ` in order to allow the developer to control it independently in development/production versions
+	 - The [whitenoise middleware](http://whitenoise.evans.io/en/stable/django.html#enable-whitenoise) was moved to the proper location in the middleware settings in `settings.py`
+	 - `STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'` setting was removed in settings.py since it wasn't needed to get tests to pass, after running `collectstatic` locally, [this part of Whitenoise documentation](http://whitenoise.evans.io/en/stable/django.html#why-do-i-get-valueerror-missing-staticfiles-manifest-entry-for) helping to bring this understanding of using the `collectstatic` command
+	 - After this and pushing the new setup to Github and then Heroku helped to get the deployed version working again with `DEBUG` being `False` in production
+
 #### Elements present on all pages
 **Navbar**
  - Tested that 'Login' and 'Register' links are only available when not logged in, and that only 'My Profile', 'Logout' and 'Game Projects' links are available when logged in
@@ -198,6 +207,8 @@ Since these pages are built-in from django-allauth it is safe to assume that the
  - Clicked on the Delete button to confirm that this will delete the project from the database and Game Project page
  - Tested accessing the links with users that were either not the owner of the project or were just a normal user. The intended redirects and error messages appeared informing the user that they cannot perform these actions
  - Tested the Cancel button to confirm that it redirects back to the Project Detail page
+  - Tested 'Upload Image' field to confirm that adding/updating a game project successfully attaches an image to the game project data object
+	 - **Resolved Bug**: An error page appeared when trying to submit the form with an image file attached. The developer had missed adding the environment variable for the AWS_STORAGE_BUCKET_NAME to Heroku. This was promptly added and subsequently the error was fixed
 
 #### Checkout
 **Checkout page**
