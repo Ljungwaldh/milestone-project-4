@@ -360,7 +360,7 @@ Order Number | order_number | max_length=32, null=False, editable=False | CharFi
 - [PIP](https://pip.pypa.io/en/stable/installing/) for installation of tools needed in this project.
 - [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03) to handle version control.
 - [GitHub](https://github.com/) to store and share all project code remotely. 
-- Heroku for deployment
+- [Heroku](https://www.heroku.com/) for deployment
 - [Balsamiq](https://balsamiq.com/) to create the wireframes for this project.
 - [Coolors](https://coolors.co/) to help define the colour scheme for the website
 - [LucidChart](https://www.lucidchart.com/pages/) to create data schemas as part of the planning phase of the project
@@ -391,14 +391,14 @@ Ensure you have the following tools:
     - An IDE such as [Visual Studio Code](https://code.visualstudio.com/)
 
 The following **must be installed** on your machine:
-    - [PIP](https://pip.pypa.io/en/stable/installing/)
-    - [Python 3](https://www.python.org/downloads/)
-    - [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03)
+- [PIP](https://pip.pypa.io/en/stable/installing/)
+- [Python 3](https://www.python.org/downloads/)
+- [Git](https://gist.github.com/derhuerst/1b15ff4652a867391f03)
 
 To allow you to access all functionality on the site locally, ensure you have created free accounts with the following services:
-    - [Stripe](https://dashboard.stripe.com/register)
-    - [AWS](https://aws.amazon.com/) and [set up an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
-    - Google's [Gmail](https://www.google.com/gmail/)  for setting up email function (be sure to enable 2 step verification to be able to create an app password, relevant for when deploying the project)
+- [Stripe](https://dashboard.stripe.com/register)
+- [AWS](https://aws.amazon.com/) and [set up an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
+- Google's [Gmail](https://www.google.com/gmail/)  for setting up email function (be sure to enable 2 step verification to be able to create an app password, relevant for when deploying the project)
 
 Please click the links above for documentation on how to set these up and retrieve the necessary environment variables.
 
