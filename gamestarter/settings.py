@@ -116,6 +116,8 @@ WSGI_APPLICATION = 'gamestarter.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
 
 if 'DATABASE_URL' in os.environ:
     db_url_dict = dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -173,10 +175,6 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-
 
 # Stripe
 STRIPE_CURRENCY = 'eur'
