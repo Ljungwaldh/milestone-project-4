@@ -438,7 +438,8 @@ _Again this **command may differ depending on your operating system**, please ch
 
     - If using Gitpod, you'll be able to set up environment variables in the Settings tab under your account. Do not forget to restart your workspace to activate your environment variables or your code will not be able to see them: 
 
-        "DEVELOPMENT": True,
+        "DEVELOPMENT": True
+        "DEBUG": True
         "SECRET_KEY": (enter key here)
         "STRIPE_SECRET": (enter key here)
         "STRIPE_PUBLIC_KEY": (enter key here)
@@ -507,6 +508,7 @@ SECRET_KEY | `<your secret key>`
 STRIPE_PUBLIC_KEY | `<your Stripe public key>`
 STRIPE_SECRET_KEY | `<your Stripe secret key>`
 USE_AWS | `True`
+DEBUG | `False`
 
 8. From the command line of your local IDE:
     - Enter the heroku postres shell 
